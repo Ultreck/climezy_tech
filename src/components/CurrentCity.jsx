@@ -8,7 +8,7 @@ const CurrentCity = () => {
   return (
     <div
       style={{ backgroundImage: `url(${img})` }}
-      className="relative bg-blend-overlay bg-slate-700 cursor-pointer w-full max-w-3xl h-72 mx-auto bg-cover rounded-lg overflow-hidden"
+      className="relative bg-blend-overlay bg-slate-700 cursor-pointer w-full max-w-4xl h-72 mx-auto bg-cover rounded-lg overflow-hidden"
     >
       <Link to={`/city/${searchLocation?.name}`}>
         <div className="text-white border-b border-slate-500 text-2xl font-semibold flex justify-between py-3 px-8 items-center bg-slate-700 ">

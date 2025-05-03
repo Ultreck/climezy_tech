@@ -13,10 +13,10 @@ export const AppProvider = ({ children }) => {
     () => JSON.parse(localStorage.getItem("weatherCache")) || {}
   );
   const [recentSearched, setRecentSearched] = useState(() =>
-    JSON.parse(localStorage.getItem("recent-searched"))
+    JSON.parse(localStorage.getItem("recent-searched")) || []
   );
   const [searchLocation, setSearchLocation] = useState(() =>
-    JSON.parse(localStorage.getItem("searched-location"))
+    JSON.parse(localStorage.getItem("searched-location")) || {}
   );
   const [notes, setNotes] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || {}

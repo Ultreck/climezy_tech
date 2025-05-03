@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div className="text w-full min-h-screen">
-      <div className="p-4 px-4 py-8 w-3xl mx-auto">
+      <div className="p-4 px-4 py-8 w-4xl mx-auto">
         <CurrentCity/>
         <h1 className="text-xl font-bold mb-4">Weather App</h1>
         {/* <WeatherBackground weatherCondition={'rain'}/> */}

@@ -24,7 +24,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const { favorites, setFavorites, setSearchLocation, searchLocation } =
     useAppContext();
-  const [selectedCity, setSelectedCity] = useState(searchLocation || null);
+  const [selectedCity, setSelectedCity] = useState( null);
   const [searchTerm, setSearchTerm] = useState("");
   const isFavorite = favorites.includes(selectedCity?.name);
   const toggleFavorite = () => {
@@ -56,7 +56,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
     async (cityName) => {
       try {
         const data = await getWeatherByCity(cityName);
-        console.log(data);
+        updateWeatherCache(cityName, data);
         setSearchLocation(data);
       } catch (err) {
         console.error(`Failed to fetch weather for ${cityName}`);
@@ -99,13 +99,17 @@ const CitySelector = ({ disabled, onCityChange }) => {
                     key={cityName}
                     value={cityName}
                     onSelect={() => handleCitySelect(cityName)}
-                    className={`flex ${selectedCity?.name === cityName && 'bg-gray-100'} justify-between`}
+                    className={`flex ${
+                      selectedCity?.name === cityName && "bg-gray-100"
+                    } justify-between`}
                   >
-                    <div className={`text-base flex justify-between items-center w-full`}>
+                    <div
+                      className={`text-base flex justify-between items-center w-full`}
+                    >
                       {cityName}
                       <div className={`text  flex items-center space-x-2`}>
                         <button onClick={toggleFavorite} className="text-3xl">
-                          {isFavorite ? "★" : "☆"}
+                          {isFavorite && selectedCity?.name === cityName ? "★" : "☆"}
                         </button>
                         <Check
                           className={cn(

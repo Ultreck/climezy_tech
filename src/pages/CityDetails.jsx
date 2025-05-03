@@ -3,7 +3,8 @@ import { useAppContext } from '../context/AppContext';
 
 const CityDetails = () => {
   const { weatherCache } = useAppContext();
-  const weatherData = weatherCache[window.location.pathname.split('/').pop()]; // Get the city name from the URL
+  const weatherData = weatherCache[window.location.pathname.split('/').pop().split('%20').join(' ')]; // Get the city name from the URL
+console.log(weatherCache[window.location.pathname.split('/').pop().split('%20').join(' ')]);
 
   // Convert Unix timestamps to time strings
   const formatTime = (timestamp) => {
@@ -20,7 +21,7 @@ const CityDetails = () => {
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">{weatherData?.name}, {weatherData?.sys?.country}</h1>
-        <p className="text-gray-600">As of {new Date(weatherData.dt * 1000).toLocaleTimeString()}</p>
+        <p className="text-gray-600">As of {new Date(weatherData?.dt * 1000).toLocaleTimeString()}</p>
       </div>
 
       {/* Current Weather */}
@@ -32,8 +33,8 @@ const CityDetails = () => {
             <div className="text-gray-500">Day {Math.round(weatherData?.main?.temp_max)}° • Night {Math.round(weatherData?.main?.temp_min)}°</div>
           </div>
           <img 
-            src={getWeatherIcon(weatherData.weather[0].icon)} 
-            alt={weatherData.weather[0].main}
+            src={getWeatherIcon(weatherData?.weather[0]?.icon)} 
+            alt={weatherData?.weather[0]?.main}
             className="w-24 h-24"
           />
         </div>
@@ -43,34 +44,34 @@ const CityDetails = () => {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <h3 className="font-semibold text-gray-700">Feels Like</h3>
-            <p className="text-gray-800">{Math.round(weatherData.main.feels_like)}°</p>
+            <p className="text-gray-800">{Math.round(weatherData?.main?.feels_like)}°</p>
           </div>
           <div>
             <h3 className="font-semibold text-gray-700">Humidity</h3>
-            <p className="text-gray-800">{weatherData.main.humidity}%</p>
+            <p className="text-gray-800">{weatherData?.main?.humidity}%</p>
           </div>
           <div>
             <h3 className="font-semibold text-gray-700">Wind</h3>
-            <p className="text-gray-800">{weatherData.wind.speed} km/h</p>
+            <p className="text-gray-800">{weatherData?.wind?.speed} km/h</p>
           </div>
           <div>
             <h3 className="font-semibold text-gray-700">Pressure</h3>
-            <p className="text-gray-800">{weatherData.main.pressure} mb</p>
+            <p className="text-gray-800">{weatherData?.main?.pressure} mb</p>
           </div>
           <div>
             <h3 className="font-semibold text-gray-700">Visibility</h3>
-            <p className="text-gray-800">{(weatherData.visibility / 1000).toFixed(1)} km</p>
+            <p className="text-gray-800">{(weatherData?.visibility / 1000).toFixed(1)} km</p>
           </div>
           <div>
             <h3 className="font-semibold text-gray-700">Cloud Cover</h3>
-            <p className="text-gray-800">{weatherData.clouds.all}%</p>
+            <p className="text-gray-800">{weatherData?.clouds?.all}%</p>
           </div>
         </div>
       </div>
 
       {/* Daily Forecast */}
       <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Weather Today in {weatherData.name}</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Weather Today in {weatherData?.name}</h2>
         
         <div className="space-y-4">
           <div className="flex justify-between items-center">
@@ -107,8 +108,8 @@ const CityDetails = () => {
         <div className="space-y-3">
           <div className="flex justify-between items-center">
             <span className="text-gray-700">Now</span>
-            <span className="font-medium">{Math.round(weatherData.main.temp)}°</span>
-            <span className="text-gray-600 capitalize">{weatherData.weather[0].description}</span>
+            <span className="font-medium">{Math.round(weatherData?.main?.temp)}°</span>
+            <span className="text-gray-600 capitalize">{weatherData?.weather[0]?.description}</span>
             <span className="text-yellow-500">2%</span>
           </div>
           <div className="flex justify-between items-center">
@@ -143,11 +144,11 @@ const CityDetails = () => {
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center">
             <h3 className="font-semibold text-gray-700">Sunrise</h3>
-            <p className="text-gray-800">{formatTime(weatherData.sys.sunrise)}</p>
+            <p className="text-gray-800">{formatTime(weatherData?.sys?.sunrise)}</p>
           </div>
           <div className="text-center">
             <h3 className="font-semibold text-gray-700">Sunset</h3>
-            <p className="text-gray-800">{formatTime(weatherData.sys.sunset)}</p>
+            <p className="text-gray-800">{formatTime(weatherData?.sys?.sunset)}</p>
           </div>
         </div>
       </div>

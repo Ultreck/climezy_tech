@@ -46,7 +46,7 @@ const CityCard = ({ city }) => {
         </div>
       </Link>
       <div className="space-x-2 ml-4 flex-shrink-0">
-        <button onClick={toggleFavorite} className="text-xl">
+        <button onClick={toggleFavorite} className="text-3xl text-yellow-700">
           {isFavorite ? "★" : "☆"}
         </button>
         <button onClick={removeCity} className="text-xl">🗑</button>

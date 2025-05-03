@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import CityDetails from "./pages/CityDetails";
 import Navbar from "./components/Navbar";
+import { Toaster } from "sonner";
 
 const App = () => (
   <AppProvider>
@@ -16,6 +17,7 @@ const App = () => (
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
+    <Toaster position="top-center" richColors /> 
   </AppProvider>
 );
 

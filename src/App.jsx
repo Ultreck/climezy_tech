@@ -4,9 +4,11 @@ import { AppProvider } from "./context/AppContext";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import CityDetails from "./pages/CityDetails";
+import Navbar from "./components/Navbar";
 
 const App = () => (
   <AppProvider>
+    <Navbar/>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />

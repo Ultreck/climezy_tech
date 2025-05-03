@@ -5,6 +5,7 @@ import CityCard from "../components/CityCard";
 import { TOP_15_CITIES } from "../constants/CityLists";
 import { getWeatherByCity } from "../api/weather";
 import axios from "axios";
+import WeatherBackground from "../components/WeatherBackground";
 
 const Home = () => {
   const { favorites, removed, weatherCache, updateWeatherCache } =
@@ -32,28 +33,31 @@ const Home = () => {
     });
   }, [cities]);
 
-//   useEffect(() => {
-//       const appId = import.meta.env.VITE_WEATHER_API_KEY;
-//       const city = "London";
-//     axios
-//       .get(
-//         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`
-//       )
-//       .then((res) => {
-//         console.log(res);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }, []);
+  //   useEffect(() => {
+  //       const appId = import.meta.env.VITE_WEATHER_API_KEY;
+  //       const city = "London";
+  //     axios
+  //       .get(
+  //         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`
+  //       )
+  //       .then((res) => {
+  //         console.log(res);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Weather App</h1>
-      <div className="grid grid-cols-1 gap-4">
-        {cities.map((city) => (
-          <CityCard key={city} city={city} />
-        ))}
+    <div className="text w-full min-h-screen">
+      <div className="p-4 px-4 py-8 w-3xl mx-auto">
+        <h1 className="text-xl font-bold mb-4">Weather App</h1>
+        <WeatherBackground weatherCondition={'clouds'}/>
+        <div className="grid grid-cols-1 gap-4">
+          {cities.map((city) => (
+            <CityCard key={city} city={city} />
+          ))}
+        </div>
       </div>
     </div>
   );

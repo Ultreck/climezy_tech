@@ -24,8 +24,8 @@ const CitySelector = ({ disabled, onCityChange }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const { favorites, setFavorites, setSearchLocation, searchLocation } =
     useAppContext();
-  const [selectedCity, setSelectedCity] = useState( null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCity, setSelectedCity] = useState(searchLocation || null);
+  const [searchTerm, setSearchTerm] = useState(searchLocation?.name || "");
   const isFavorite = favorites.includes(selectedCity?.name);
   const toggleFavorite = () => {
     setFavorites((prev) =>

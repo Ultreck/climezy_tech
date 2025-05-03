@@ -18,7 +18,7 @@ const CurrentCity = () => {
           </p>
         </div>
         <div className="text-white flex font-semibold text-7xl px-10 mt-7 ">
-          {searchLocation?.main.temp}°
+          {searchLocation?.main?.temp}°
           <img
             src={`https://openweathermap.org/img/wn/${searchLocation?.weather[0]?.icon}@2x.png`}
             alt="Weather Icon"

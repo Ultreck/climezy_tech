@@ -57,8 +57,8 @@ const CitySelector = ({ disabled, onCityChange }) => {
     async (cityName) => {
       try {
         const data = await getWeatherByCity(cityName);
-        updateWeatherCache(cityName, data);
         setSearchLocation(data);
+        updateWeatherCache(cityName, data);
       } catch (err) {
         console.error(`Failed to fetch weather for ${cityName}`);
       }

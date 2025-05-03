@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -41,13 +41,21 @@ const CitySelector = ({ disabled, onCityChange }) => {
     .slice(0, 200) 
 }, [searchTerm, cityArray]); 
 
-  const handleCitySelect = (cityName) => {
+//   const handleCitySelect = (cityName) => {
+//     const city = { name: cityName };
+//     setSelectedCity(city);
+//     onCityChange?.(city);
+//     setOpenDropdown(false);
+//     setSearchTerm("");
+//   };
+
+  const handleCitySelect = useCallback((cityName) => {
     const city = { name: cityName };
     setSelectedCity(city);
     onCityChange?.(city);
     setOpenDropdown(false);
-    setSearchTerm("");
-  };
+    setSearchTerm('');
+  }, [onCityChange]);
 
   return (
     <Popover open={openDropdown} onOpenChange={setOpenDropdown}>
@@ -73,7 +81,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
           <CommandList>
             <CommandEmpty>No cities found</CommandEmpty>
             <CommandGroup>
-              <ScrollArea className="h-[300px]">
+              <ScrollArea className="[350px] pb-10">
                 {filteredCities.map((cityName) => (
                   <CommandItem
                     key={cityName}

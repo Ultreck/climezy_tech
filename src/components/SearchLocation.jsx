@@ -77,7 +77,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
           role="combobox"
           aria-expanded={openDropdown}
           disabled={disabled}
-          className="w-[300px] py-6 bg-slate-700 hover:bg-slate-600 justify-between"
+          className="w-[300px] py-6 cursor-pointer bg-slate-700 hover:bg-slate-600 justify-between"
         >
           {selectedCity ? selectedCity.name : "Select City..."}
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-100" />

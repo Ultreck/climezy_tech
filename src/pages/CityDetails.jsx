@@ -2,9 +2,16 @@ import React from 'react'
 import { useAppContext } from '../context/AppContext';
 
 const CityDetails = () => {
-  const { weatherCache } = useAppContext();
-  const weatherData = weatherCache[window.location.pathname.split('/').pop().split('%20').join(' ')]; // Get the city name from the URL
-console.log(weatherCache[window.location]);
+  const { weatherCache, searchLocation } = useAppContext();
+  const city = weatherCache[window.location.pathname.split('/').pop().split('%20').join(' ')];
+  let weatherData = {};
+  if(city){
+     weatherData = city; 
+  }else{
+    weatherData = searchLocation;
+  }
+console.log(weatherData);
+console.log(city);
 
   // Convert Unix timestamps to time strings
   const formatTime = (timestamp) => {

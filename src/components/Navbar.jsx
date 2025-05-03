@@ -14,8 +14,10 @@ const Navbar = () => {
             <a href="/favorites" className="hover:text-gray-300">Favorites</a>
             </div>
         </nav>
-        <div className="text-white bg-gray-800">
+        <div className="text-white bg-gray-800 ">
+            <div className="text w-5xl mx-auto">
              reprehenderit dolore ex officiis!
+            </div>
         </div>
     </div>
   )

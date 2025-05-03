@@ -18,44 +18,56 @@ import {
 import { cn } from "@/lib/utils";
 import cities from "cities-list";
 import { useAppContext } from "../context/AppContext";
+import { getWeatherByCity } from "../api/weather";
 
 const CitySelector = ({ disabled, onCityChange }) => {
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [openDropdown, setOpenDropdown] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const { favorites, setFavorites } = useAppContext();
+    const [openDropdown, setOpenDropdown] = useState(false);
+    const { favorites, setFavorites, setSearchLocation, searchLocation } = useAppContext();
+    const [selectedCity, setSelectedCity] = useState(searchLocation || null);
+  const [searchTerm, setSearchTerm] = useState(searchLocation?.name || '');
   const isFavorite = favorites.includes(selectedCity?.name);
   const toggleFavorite = () => {
     setFavorites((prev) =>
-      isFavorite ? prev.filter((c) => c !== selectedCity?.name) : [...prev, selectedCity?.name]
+      isFavorite
+        ? prev.filter((c) => c !== selectedCity?.name)
+        : [...prev, selectedCity?.name]
     );
   };
 
-
   const cityArray = useMemo(() => Object.keys(cities), []);
-  
+
   const filteredCities = useMemo(() => {
     if (!searchTerm) return [];
     return cityArray
-    .filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
-    .slice(0, 200) 
-}, [searchTerm, cityArray]); 
+      .filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
+      .slice(0, 200);
+  }, [searchTerm, cityArray]);
 
-//   const handleCitySelect = (cityName) => {
-//     const city = { name: cityName };
-//     setSelectedCity(city);
-//     onCityChange?.(city);
-//     setOpenDropdown(false);
-//     setSearchTerm("");
-//   };
+  //   const handleCitySelect = (cityName) => {
+  //     const city = { name: cityName };
+  //     setSelectedCity(city);
+  //     onCityChange?.(city);
+  //     setOpenDropdown(false);
+  //     setSearchTerm("");
+  //   };
 
-  const handleCitySelect = useCallback((cityName) => {
-    const city = { name: cityName };
-    setSelectedCity(city);
-    onCityChange?.(city);
-    setOpenDropdown(false);
-    setSearchTerm('');
-  }, [onCityChange]);
+  const handleCitySelect = useCallback(
+    async (cityName) => {
+      try {
+        const data = await getWeatherByCity(cityName);
+        console.log(data);
+        setSearchLocation(data);
+      } catch (err) {
+        console.error(`Failed to fetch weather for ${cityName}`);
+      };
+      const city = { name: cityName };
+      setSelectedCity(city);
+      onCityChange?.(city);
+      setOpenDropdown(false);
+      setSearchTerm("");
+    },
+    [onCityChange]
+  );
 
   return (
     <Popover open={openDropdown} onOpenChange={setOpenDropdown}>
@@ -79,7 +91,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
             onValueChange={setSearchTerm}
           />
           <CommandList>
-            <CommandEmpty>No cities found</CommandEmpty>
+            <CommandEmpty>Type to search for the city you want...</CommandEmpty>
             <CommandGroup>
               <ScrollArea className="[350px] pb-10">
                 {filteredCities.map((cityName) => (

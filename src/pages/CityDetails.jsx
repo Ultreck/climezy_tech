@@ -4,7 +4,7 @@ import { useAppContext } from '../context/AppContext';
 const CityDetails = () => {
   const { weatherCache } = useAppContext();
   const weatherData = weatherCache[window.location.pathname.split('/').pop().split('%20').join(' ')]; // Get the city name from the URL
-console.log(weatherCache[window.location.pathname.split('/').pop().split('%20').join(' ')]);
+console.log(weatherCache[window.location]);
 
   // Convert Unix timestamps to time strings
   const formatTime = (timestamp) => {

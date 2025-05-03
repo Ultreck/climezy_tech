@@ -33,21 +33,6 @@ const Home = () => {
     });
   }, [cities]);
 
-  //   useEffect(() => {
-  //       const appId = import.meta.env.VITE_WEATHER_API_KEY;
-  //       const city = "London";
-  //     axios
-  //       .get(
-  //         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`
-  //       )
-  //       .then((res) => {
-  //         console.log(res);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }, []);
-
   return (
     <div className="text w-full min-h-screen">
       <div className="p-4 px-4 py-8 w-3xl mx-auto">

@@ -5,7 +5,6 @@ const BASE_URL = import.meta.env.VITE_WEATHER_BASE_URL;
 
 export const getWeatherByCity = async (city) => {
    const encodedCity = encodeURIComponent(city);
-    console.log(encodedCity);
   const res = await axios.get(`${BASE_URL}?q=${encodedCity}&appid=${API_KEY}&units=metric`);  
   return res.data;
 };

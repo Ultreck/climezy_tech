@@ -38,7 +38,8 @@ const CitySelector = ({ disabled, onCityChange }) => {
   const cityArray = useMemo(() => Object.keys(cities), []);
 
   const filteredCities = useMemo(() => {
-    if (!searchTerm) return [];
+    if (!searchTerm) return cityArray.filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
+        .slice(0, 20);
     return cityArray
       .filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
       .slice(0, 200);

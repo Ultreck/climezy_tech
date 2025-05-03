@@ -8,7 +8,8 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='bg-slate-900 text-white'>
+        This is a test for app.jsx
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

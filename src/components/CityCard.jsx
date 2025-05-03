@@ -2,16 +2,17 @@ import { useAppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 
 const CityCard = ({ city }) => {
-  const { weatherCache, favorites, setFavorites, removed, setRemoved } = useAppContext();
-  const temp = weatherCache[city]?.main?.temp;
-
-  const isFavorite = favorites.includes(city);
-
-  const toggleFavorite = () => {
-    setFavorites((prev) =>
-      isFavorite ? prev.filter((c) => c !== city) : [...prev, city]
+    
+    const { weatherCache, favorites, setFavorites, removed, setRemoved } = useAppContext();
+    const temp = weatherCache[city]?.main?.temp;
+    
+    const isFavorite = favorites.includes(city);
+    
+    const toggleFavorite = () => {
+        setFavorites((prev) =>
+            isFavorite ? prev.filter((c) => c !== city) : [...prev, city]
     );
-  };
+};
 
   const removeCity = () => {
     setRemoved((prev) => [...prev, city]);

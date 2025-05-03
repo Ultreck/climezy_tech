@@ -5,6 +5,7 @@ export const useGeolocation = (onSuccess) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
+        console.log(latitude, longitude);
         onSuccess({ latitude, longitude });
       });
     }

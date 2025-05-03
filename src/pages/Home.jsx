@@ -1,13 +1,23 @@
 import { useEffect } from "react";
-import { TOP_15_CITIES } from "../constants/cityList";
-import { getWeatherByCity } from "../api/weatherService";
+// import { getWeatherByCity } from "../api/weatherService";
 import { useAppContext } from "../context/AppContext";
 import CityCard from "../components/CityCard";
+import { TOP_15_CITIES } from "../constants/CityLists";
+import { getWeatherByCity } from "../api/weather";
+import axios from "axios";
 
 const Home = () => {
-  const { favorites, removed, weatherCache, updateWeatherCache } = useAppContext();
+  const { favorites, removed, weatherCache, updateWeatherCache } =
+    useAppContext();
 
-  const cities = [...new Set([...favorites.sort(), ...TOP_15_CITIES.sort().filter(c => !removed.includes(c) && !favorites.includes(c))])];
+  const cities = [
+    ...new Set([
+      ...favorites.sort(),
+      ...TOP_15_CITIES.sort().filter(
+        (c) => !removed.includes(c) && !favorites.includes(c)
+      ),
+    ]),
+  ];
 
   useEffect(() => {
     cities.forEach(async (city) => {
@@ -22,11 +32,28 @@ const Home = () => {
     });
   }, [cities]);
 
+//   useEffect(() => {
+//       const appId = import.meta.env.VITE_WEATHER_API_KEY;
+//       const city = "London";
+//     axios
+//       .get(
+//         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`
+//       )
+//       .then((res) => {
+//         console.log(res);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }, []);
+
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Weather App</h1>
       <div className="grid grid-cols-1 gap-4">
-        {cities.map(city => <CityCard key={city} city={city} />)}
+        {cities.map((city) => (
+          <CityCard key={city} city={city} />
+        ))}
       </div>
     </div>
   );

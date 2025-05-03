@@ -14,7 +14,7 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("weatherCache", JSON.stringify(weatherCache));
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [favorites, removed, weatherCache, notes]);
-
+  
   const updateWeatherCache = (city, data) => {
     setWeatherCache((prev) => ({ ...prev, [city]: data }));
   };

@@ -36,10 +36,12 @@ export const AppProvider = ({ children }) => {
   };
 
   const updateRecentlySearchedCity = (city) => {
-    console.log(city);
-    
-    setRecentSearched((prev) => {
-        return [...prev, city].slice(-10);
+      setRecentSearched((prev) => {
+        const newList = [...prev, city];
+        const uniqueList = newList.filter((value, index, self) => {
+            return index === self.findIndex((t) => t.name === value.name);
+        })
+        return uniqueList.slice(-10);
     });
   };
   return (

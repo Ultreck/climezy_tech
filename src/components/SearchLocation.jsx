@@ -110,7 +110,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
                       key={cityName}
                       value={cityName}
                       onSelect={() => handleCitySelect(cityName)}
-                      className={`p-0 flex rounded-none ${
+                      className={` flex rounded-none ${
                         selectedCity?.name === cityName && "bg-gray-100"
                       } justify-between  `}
                     >

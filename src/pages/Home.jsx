@@ -2,7 +2,7 @@ import { useEffect } from "react";
 // import { getWeatherByCity } from "../api/weatherService";
 import { useAppContext } from "@/context/AppContext";
 import CityCard from "@/components/CityCard";
-import { TOP_15_CITIES } from "@/constants/CityLists";
+import { TOP_15_CITIES } from "@/constants/cityLists";
 import { getWeatherByCity } from "@/api/weather";
 import axios from "axios";
 import WeatherBackground from "@/components/WeatherBackground";

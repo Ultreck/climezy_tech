@@ -30,16 +30,21 @@ const CitySelector = ({ disabled, onCityChange }) => {
     searchLocation,
     updateRecentlySearchedCity,
     recentSearched,
+    updateFavoriteStatus,
   } = useAppContext();
   const [selectedCity, setSelectedCity] = useState(searchLocation || null);
   const [searchTerm, setSearchTerm] = useState("");
   const isFavorite = favorites.includes(selectedCity?.name);
-  const toggleFavorite = () => {
-    setFavorites((prev) =>
-      isFavorite
-        ? prev.filter((c) => c !== selectedCity?.name)
-        : [...prev, selectedCity?.name]
-    );
+  
+  const toggleFavorite = (name, favorite) => {
+    console.log(name, favorite);
+    
+    updateFavoriteStatus(name, favorite);
+    // setFavorites((prev) =>
+    //   isFavorite
+    //     ? prev.filter((c) => c !== selectedCity?.name)
+    //     : [...prev, selectedCity?.name]
+    // );
   };
   console.log(recentSearched);
 
@@ -65,7 +70,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
       try {
         const data = await getWeatherByCity(cityName);
         setSearchLocation(data);
-        updateRecentlySearchedCity(data);
+        updateRecentlySearchedCity({...data, favorite:false});
         updateWeatherCache(cityName, data);
       } catch (err) {
         console.error(`Failed to fetch weather for ${cityName}`);
@@ -158,10 +163,10 @@ const CitySelector = ({ disabled, onCityChange }) => {
                           {city?.name}
                           <div className={`text  flex items-center space-x-2`}>
                             <button
-                              onClick={toggleFavorite}
-                              className="text-3xl"
+                              onClick={() =>toggleFavorite(city?.name, !city?.favorite)}
+                              className="text-3xl text-orange-600"
                             >
-                              {isFavorite === city?.name ? "★" : "☆"}
+                              {city?.favorite ? "★" : "☆"}
                             </button>
                             <span className="text">
                               <SlOptionsVertical />

@@ -44,6 +44,16 @@ export const AppProvider = ({ children }) => {
         return uniqueList.slice(-10).reverse();
     });
   };
+
+  const updateFavoriteStatus = (cityName, isFavorite) => {
+    setRecentSearched((prev) => {
+      return prev.map((city) =>
+        city.name === cityName ? { ...city, favorite: isFavorite } : city
+      );
+    });
+  };
+
+  
   return (
     <AppContext.Provider
       value={{
@@ -60,6 +70,7 @@ export const AppProvider = ({ children }) => {
         recentSearched,
         setRecentSearched,
         updateRecentlySearchedCity,
+        updateFavoriteStatus
       }}
     >
       {children}

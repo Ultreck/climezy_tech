@@ -175,7 +175,6 @@ const CitySelector = ({ disabled, onCityChange }) => {
                             </button>
                             <span className="text">
                               <SlOptionsVertical onClick={() => {
-                            console.log(city?.name);
                                 handleRemoveRecentSearched(city?.name);
                                 }} />
                             </span>

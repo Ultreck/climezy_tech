@@ -2,6 +2,7 @@ import React from "react";
 import SearchLocation from "./SearchLocation";
 import { useAppContext } from "../context/AppContext";
 import { SlOptionsVertical } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { recentSearched, handleRemoveRecentSearched } = useAppContext();
@@ -12,18 +13,20 @@ const Navbar = () => {
   return (
     <div className="w-full bg-slate-900 ">
       <nav className="bg-slate-900 w-4xl mx-auto p-4 text-white flex justify-between items-center">
+        {/* <Link to="/" className="text">
         <div className="text-lg font-bold">Weather App</div>
-        <div className="text">
+        </Link> */}
+        <div className="text mx-auto">
           <SearchLocation />
         </div>
-        <div className="space-x-4">
+        {/* <div className="space-x-4">
           <a href="/" className="hover:text-gray-300">
             Home
           </a>
           <a href="/favorites" className="hover:text-gray-300">
             Favorites
           </a>
-        </div>
+        </div> */}
       </nav>
       <div className="text-white bg-gray-800 ">
         <div className="text flex justify-start py-2 max-w-4xl mx-auto">

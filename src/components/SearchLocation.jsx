@@ -36,17 +36,17 @@ const CitySelector = ({ disabled, onCityChange }) => {
   } = useAppContext();
   const [selectedCity, setSelectedCity] = useState(searchLocation || null);
   const [searchTerm, setSearchTerm] = useState("");
-  const isFavorite = favorites.includes(selectedCity?.name);
   
+  const isFavorite = favorites.includes(selectedCity?.name);
   const toggleFavorite = (name, favorite) => {
     console.log(name, favorite);
     
     updateFavoriteStatus(name, favorite);
-    // setFavorites((prev) =>
-    //   isFavorite
-    //     ? prev.filter((c) => c !== selectedCity?.name)
-    //     : [...prev, selectedCity?.name]
-    // );
+    setFavorites((prev) =>
+      isFavorite
+        ? prev.filter((c) => c !== selectedCity?.name)
+        : [...prev, selectedCity?.name]
+    );
   };
 
   const cityArray = useMemo(() => Object.keys(cities), []);

@@ -19,14 +19,14 @@ const Home = () => {
         (c) => !removed.includes(c) && !favorites.includes(c)
       ),
     ]),
-  ];
+  ];  
 
   useEffect(() => {
     cities.forEach(async (city) => {
       if (!weatherCache[city]) {
         try {
           const data = await getWeatherByCity(city);
-          updateWeatherCache(city, data);
+          updateWeatherCache(city, {...data, favorite:false});
         } catch (err) {
           console.error(`Failed to fetch weather for ${city}`);
         }

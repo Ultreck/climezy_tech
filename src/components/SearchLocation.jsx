@@ -31,6 +31,8 @@ const CitySelector = ({ disabled, onCityChange }) => {
     updateRecentlySearchedCity,
     recentSearched,
     updateFavoriteStatus,
+    handleRemoveRecentSearched,
+    updateWeatherCache,
   } = useAppContext();
   const [selectedCity, setSelectedCity] = useState(searchLocation || null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,10 +48,10 @@ const CitySelector = ({ disabled, onCityChange }) => {
     //     : [...prev, selectedCity?.name]
     // );
   };
-  console.log(recentSearched);
 
   const cityArray = useMemo(() => Object.keys(cities), []);
 
+ 
   const filteredCities = useMemo(() => {
     if (!searchTerm) return;
     return cityArray
@@ -73,7 +75,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
         updateRecentlySearchedCity({...data, favorite:false});
         updateWeatherCache(cityName, data);
       } catch (err) {
-        console.error(`Failed to fetch weather for ${cityName}`);
+        console.error(`Failed to fetch weather for ${cityName}`, err);
       }
       const city = { name: cityName };
       setSelectedCity(city);
@@ -144,8 +146,11 @@ const CitySelector = ({ disabled, onCityChange }) => {
                 ) : (
                   <>
                     {!!recentSearched?.length && (
-                      <div className="text-2xl mt-5 py-2 px-2">
+                      <div className="text-2xl flex justify-between mt-5 py-2 px-2">
                         Recent Searches
+                        <button className="text-lg cursor-pointer">
+                            Clear All
+                        </button>
                       </div>
                     )}
                     {recentSearched.map((city) => (
@@ -164,12 +169,15 @@ const CitySelector = ({ disabled, onCityChange }) => {
                           <div className={`text  flex items-center space-x-2`}>
                             <button
                               onClick={() =>toggleFavorite(city?.name, !city?.favorite)}
-                              className="text-3xl text-orange-600"
+                              className={`text-3xl ${city?.favorite && 'text-orange-600'} `}
                             >
                               {city?.favorite ? "★" : "☆"}
                             </button>
                             <span className="text">
-                              <SlOptionsVertical />
+                              <SlOptionsVertical onClick={() => {
+                            console.log(city?.name);
+                                handleRemoveRecentSearched(city?.name);
+                                }} />
                             </span>
                           </div>
                         </div>

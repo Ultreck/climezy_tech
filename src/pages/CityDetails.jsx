@@ -15,10 +15,7 @@ const CityDetails = () => {
   } else {
     weatherData = searchLocation;
   }
-  console.log(weatherData);
-  console.log(city);
 
-  // Convert Unix timestamps to time strings
   const formatTime = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleTimeString([], {
       hour: "2-digit",
@@ -26,7 +23,6 @@ const CityDetails = () => {
     });
   };
 
-  // Get weather icon from OpenWeatherMap
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   };

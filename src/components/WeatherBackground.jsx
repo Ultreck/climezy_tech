@@ -191,7 +191,7 @@ const WeatherBackground = ({ weatherCondition, children }) => {
       ))}
 
       {/* CSS Animations */}
-      <style jsx>{`
+      <style jsx='true'>{`
         @keyframes moveLeftRight {
           0% { transform: translateX(-100px); }
           100% { transform: translateX(calc(100% + 100px)); }

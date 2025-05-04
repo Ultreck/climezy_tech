@@ -44,6 +44,11 @@ export const AppProvider = ({ children }) => {
         return uniqueList.slice(-10).reverse();
     });
   };
+  const handleRemoveRecentSearched = (cname) => {
+    console.log(cname);
+    
+    setRecentSearched((prev) => prev.filter((city) => city.name !== cname));    
+  };
 
   const updateFavoriteStatus = (cityName, isFavorite) => {
     setRecentSearched((prev) => {
@@ -70,7 +75,8 @@ export const AppProvider = ({ children }) => {
         recentSearched,
         setRecentSearched,
         updateRecentlySearchedCity,
-        updateFavoriteStatus
+        updateFavoriteStatus,
+        handleRemoveRecentSearched,
       }}
     >
       {children}

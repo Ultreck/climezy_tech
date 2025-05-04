@@ -148,7 +148,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
                         key={city?.name}
                         value={city?.name}
                         onSelect={() => handleCitySelect(city?.name)}
-                        className={`flex rounded-none hover:bg-slate-700 ${
+                        className={`flex rounded-none ${
                           selectedCity?.name === city?.name && "bg-gray-200"
                         } justify-between`}
                       >

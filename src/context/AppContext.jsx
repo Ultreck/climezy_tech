@@ -41,7 +41,7 @@ export const AppProvider = ({ children }) => {
         const uniqueList = newList.filter((value, index, self) => {
             return index === self.findIndex((t) => t.name === value.name);
         })
-        return uniqueList.slice(-10);
+        return uniqueList.slice(-10).reverse();
     });
   };
   return (

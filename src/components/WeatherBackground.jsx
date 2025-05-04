@@ -26,7 +26,7 @@ const WeatherBackground = ({ weatherCondition, children }) => {
             id: i,
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 50}%`,
-            size: `${Math.random() * 3 + 10}px`,
+            size: `${Math.random() * 10 + 10}px`,
             opacity: Math.random() * 0.8 + 0.2,
             animationDelay: `${Math.random() * 5}s`
           }));

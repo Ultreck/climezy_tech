@@ -19,13 +19,20 @@ import { cn } from "@/lib/utils";
 import cities from "cities-list";
 import { useAppContext } from "../context/AppContext";
 import { getWeatherByCity } from "../api/weather";
+import { SlOptionsVertical } from "react-icons/sl";
 
 const CitySelector = ({ disabled, onCityChange }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const { favorites, setFavorites, setSearchLocation, searchLocation } =
-    useAppContext();
+  const {
+    favorites,
+    setFavorites,
+    setSearchLocation,
+    searchLocation,
+    updateRecentlySearchedCity,
+    recentSearched,
+  } = useAppContext();
   const [selectedCity, setSelectedCity] = useState(searchLocation || null);
-  const [searchTerm, setSearchTerm] = useState(searchLocation?.name || "");
+  const [searchTerm, setSearchTerm] = useState("");
   const isFavorite = favorites.includes(selectedCity?.name);
   const toggleFavorite = () => {
     setFavorites((prev) =>
@@ -34,12 +41,12 @@ const CitySelector = ({ disabled, onCityChange }) => {
         : [...prev, selectedCity?.name]
     );
   };
+  console.log(recentSearched);
 
   const cityArray = useMemo(() => Object.keys(cities), []);
 
   const filteredCities = useMemo(() => {
-    if (!searchTerm) return cityArray.filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
-        .slice(0, 20);
+    if (!searchTerm) return;
     return cityArray
       .filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
       .slice(0, 200);
@@ -58,6 +65,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
       try {
         const data = await getWeatherByCity(cityName);
         setSearchLocation(data);
+        updateRecentlySearchedCity(data);
         updateWeatherCache(cityName, data);
       } catch (err) {
         console.error(`Failed to fetch weather for ${cityName}`);
@@ -65,7 +73,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
       const city = { name: cityName };
       setSelectedCity(city);
       onCityChange?.(city);
-    //   setOpenDropdown(false);
+      //   setOpenDropdown(false);
       setSearchTerm("");
     },
     [onCityChange]
@@ -78,52 +86,93 @@ const CitySelector = ({ disabled, onCityChange }) => {
           role="combobox"
           aria-expanded={openDropdown}
           disabled={disabled}
-          className="w-[300px] py-6 cursor-pointer bg-slate-700 hover:bg-slate-600 justify-between"
+          className="w-[400px] py-6 cursor-pointer bg-slate-700 hover:bg-slate-600 justify-between"
         >
           {selectedCity ? selectedCity.name : "Select City..."}
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-100" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-0">
+      <PopoverContent className="w-[400px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             placeholder="Search city..."
             value={searchTerm}
             onValueChange={setSearchTerm}
+            className=""
           />
           <CommandList>
             <CommandEmpty>Type to search for the city you want...</CommandEmpty>
-            <CommandGroup>
-              <ScrollArea className="[350px] pb-10">
-                {filteredCities.map((cityName) => (
-                  <CommandItem
-                    key={cityName}
-                    value={cityName}
-                    onSelect={() => handleCitySelect(cityName)}
-                    className={`flex ${
-                      selectedCity?.name === cityName && "bg-gray-100"
-                    } justify-between`}
-                  >
-                    <div
-                      className={`text-base flex justify-between items-center w-full`}
+            <CommandGroup className="p-0 ">
+              <ScrollArea className="[350px] pb-5 px-0">
+                {searchTerm ? (
+                  filteredCities.map((cityName) => (
+                    <CommandItem
+                      key={cityName}
+                      value={cityName}
+                      onSelect={() => handleCitySelect(cityName)}
+                      className={`p-0 flex rounded-none ${
+                        selectedCity?.name === cityName && "bg-gray-100"
+                      } justify-between  `}
                     >
-                      {cityName}
-                      <div className={`text  flex items-center space-x-2`}>
-                        <button onClick={toggleFavorite} className="text-3xl">
-                          {isFavorite && selectedCity?.name === cityName ? "★" : "☆"}
-                        </button>
-                        <Check
-                          className={cn(
-                            "h-5 w-5 text-xl",
-                            selectedCity?.name === cityName
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
+                      <div
+                        className={`text-base  flex justify-between items-center w-full`}
+                      >
+                        {cityName}
+                        <div className={`text  flex items-center space-x-2`}>
+                          <button onClick={toggleFavorite} className="text-3xl">
+                            {isFavorite && selectedCity?.name === cityName
+                              ? "★"
+                              : "☆"}
+                          </button>
+                          <Check
+                            className={cn(
+                              "h-5 w-5 text-xl",
+                              selectedCity?.name === cityName
+                                ? "opacity-100"
+                                : "opacity-0"
+                            )}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </CommandItem>
-                ))}
+                    </CommandItem>
+                  ))
+                ) : (
+                  <>
+                    {!!recentSearched?.length && (
+                      <div className="text-2xl mt-5 py-2 px-2">
+                        Recent Searches
+                      </div>
+                    )}
+                    {recentSearched.map((city) => (
+                      <CommandItem
+                        key={city?.name}
+                        value={city?.name}
+                        onSelect={() => handleCitySelect(city?.name)}
+                        className={`flex rounded-none hover:bg-slate-700 ${
+                          selectedCity?.name === city?.name && "bg-gray-200"
+                        } justify-between`}
+                      >
+                        <div
+                          className={`text-base flex justify-between items-center w-full`}
+                        >
+                          {city?.name}
+                          <div className={`text  flex items-center space-x-2`}>
+                            <button
+                              onClick={toggleFavorite}
+                              className="text-3xl"
+                            >
+                              {isFavorite === city?.name ? "★" : "☆"}
+                            </button>
+                            <span className="text">
+                              <SlOptionsVertical />
+                            </span>
+                          </div>
+                        </div>
+                      </CommandItem>
+                    ))}
+                  </>
+                )}
+
                 <ScrollBar orientation="vertical" />
               </ScrollArea>
             </CommandGroup>

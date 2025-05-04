@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
     () => JSON.parse(localStorage.getItem("weatherCache")) || {}
   );
   const [recentSearched, setRecentSearched] = useState(() =>
-    JSON.parse(localStorage.getItem("recent-searched")) || []
+    JSON.parse(localStorage.getItem("recently-searched")) || []
   );
   const [searchLocation, setSearchLocation] = useState(() =>
     JSON.parse(localStorage.getItem("searched-location")) || {}
@@ -27,7 +27,7 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("removed", JSON.stringify(removed));
     localStorage.setItem("weatherCache", JSON.stringify(weatherCache));
     localStorage.setItem("notes", JSON.stringify(notes));
-    localStorage.setItem("recent", JSON.stringify(recentSearched));
+    localStorage.setItem("recently-searched", JSON.stringify(recentSearched));
     localStorage.setItem("searched-location", JSON.stringify(searchLocation));
   }, [favorites, removed, weatherCache, recentSearched, searchLocation, notes]);
 
@@ -35,6 +35,13 @@ export const AppProvider = ({ children }) => {
     setWeatherCache((prev) => ({ ...prev, [city]: data }));
   };
 
+  const updateRecentlySearchedCity = (city) => {
+    console.log(city);
+    
+    setRecentSearched((prev) => {
+        return [...prev, city].slice(-10);
+    });
+  };
   return (
     <AppContext.Provider
       value={{
@@ -50,6 +57,7 @@ export const AppProvider = ({ children }) => {
         searchLocation,
         recentSearched,
         setRecentSearched,
+        updateRecentlySearchedCity,
       }}
     >
       {children}

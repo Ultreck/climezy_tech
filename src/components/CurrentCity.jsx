@@ -12,7 +12,7 @@ const CurrentCity = () => {
     >
       <Link to={`/city/${searchLocation?.name}`}>
         <div className="text-white border-b border-slate-500 text-2xl font-semibold flex justify-between py-3 px-8 items-center bg-slate-700 ">
-          <p className="text">{searchLocation?.name}</p>
+          <p className="text">{searchLocation?.name}, {searchLocation?.sys?.country}</p>
           <p className="text">
             As of {new Date(searchLocation?.dt * 1000).toLocaleTimeString()}
           </p>

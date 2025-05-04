@@ -24,21 +24,21 @@ const CityCard = ({ city }) => {
   };
 
   return (
-    <div className="border rounded p-3 flex justify-between items-center">
-      <Link to={`/city/${city}`} className="flex-1 flex items-center space-x-4">
+    <div className="border-t rounded p-4 flex justify-between items-center">
+      <Link to={`/city/${city}`} className="grid grid-cols-3 w-3/4 space-x-4">
+      <div className="font-semibold text-xl flex  items-center">{city}</div>
         {icon && (
           <img
             src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
             alt="Weather Icon"
-            className="w-10 h-10"
+            className="w-12 h-12"
           />
         )}
         <div>
-          <div className="font-semibold">{city}</div>
           {temp !== undefined ? (
-            <div className="text-sm text-gray-700">
-              <div>{temp}°C - {description}</div>
-              <div>💧 {humidity}% | 🌬 {windSpeed} m/s</div>
+            <div className="text-xl flex h-full justify-center items-center text-gray-700">
+              <div>{temp}°C</div>
+              {/* <div>💧 {humidity}% | 🌬 {windSpeed} m/s</div> */}
             </div>
           ) : (
             <div className="text-sm text-gray-400">Loading...</div>
@@ -46,7 +46,7 @@ const CityCard = ({ city }) => {
         </div>
       </Link>
       <div className="space-x-2 ml-4 flex-shrink-0">
-        <button onClick={toggleFavorite} className="text-3xl text-yellow-700">
+        <button onClick={toggleFavorite} className="text-3xl">
           {isFavorite ? "★" : "☆"}
         </button>
         <button onClick={removeCity} className="text-xl">🗑</button>

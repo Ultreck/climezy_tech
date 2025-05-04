@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const WeatherBackground = ({ weatherCondition }) => {
+const WeatherBackground = ({ weatherCondition, children }) => {
   const [clouds, setClouds] = useState([]);
   const [rain, setRain] = useState([]);
   const [snow, setSnow] = useState([]);
@@ -26,7 +26,7 @@ const WeatherBackground = ({ weatherCondition }) => {
             id: i,
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 50}%`,
-            size: `${Math.random() * 3 + 1}px`,
+            size: `${Math.random() * 3 + 10}px`,
             opacity: Math.random() * 0.8 + 0.2,
             animationDelay: `${Math.random() * 5}s`
           }));
@@ -39,8 +39,8 @@ const WeatherBackground = ({ weatherCondition }) => {
           id: i,
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 30}%`,
-          size: `${Math.random() * 80 + 40}px`,
-          speed: `${Math.random() * 50 + 30}s`,
+          size: `${Math.random() * 10 + 20}px`,
+          speed: `${Math.random() * 10 + 10}s`,
           opacity: Math.random() * 0.7 + 0.3
         }));
         setClouds(newClouds);
@@ -50,7 +50,7 @@ const WeatherBackground = ({ weatherCondition }) => {
           id: i,
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 30}%`,
-          size: `${Math.random() * 80 + 40}px`,
+          size: `${Math.random() * 10 + 20}px`,
           speed: `${Math.random() * 30 + 20}s`,
           opacity: Math.random() * 0.7 + 0.3,
           dark: true
@@ -70,7 +70,7 @@ const WeatherBackground = ({ weatherCondition }) => {
           id: i,
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 30}%`,
-          size: `${Math.random() * 80 + 40}px`,
+          size: `${Math.random() * 10 + 20}px`,
           speed: `${Math.random() * 50 + 30}s`,
           opacity: Math.random() * 0.7 + 0.3
         })));
@@ -90,7 +90,7 @@ const WeatherBackground = ({ weatherCondition }) => {
           id: i,
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 30}%`,
-          size: `${Math.random() * 80 + 40}px`,
+          size: `${Math.random() * 10 + 20}px`,
           speed: `${Math.random() * 50 + 30}s`,
           opacity: Math.random() * 0.7 + 0.3
         }));
@@ -98,29 +98,32 @@ const WeatherBackground = ({ weatherCondition }) => {
     }
   }, [weatherCondition]);
 
-  // Function to determine gradient based on weather
+
   const getBackgroundGradient = () => {
     switch(weatherCondition.toLowerCase()) {
       case 'clear':
-        return 'bg-gradient-to-b from-blue-400 to-blue-600';
+        return 'bg-gradient-to-b from-blue-600 to-blue-800';
       case 'clouds':
       case 'broken clouds':
-        return 'bg-gradient-to-b from-gray-300 to-gray-500';
+        return 'bg-gradient-to-b from-slate-600 to-slate-800';
       case 'rain':
-        return 'bg-gradient-to-b from-gray-500 to-gray-700';
+        return 'bg-gradient-to-b from-slate-600 to-slate-800';
       case 'snow':
-        return 'bg-gradient-to-b from-blue-100 to-blue-300';
+        return 'bg-gradient-to-b from-blue-400 to-blue-700';
       default:
-        return 'bg-gradient-to-b from-blue-400 to-blue-600';
+        return 'bg-gradient-to-b from-blue-600 to-blue-800';
     }
   };
 
   return (
-    <div className={`relative w-full max-w-3xl h-64 mx-auto rounded-xl overflow-hidden ${getBackgroundGradient()}`}>
+    <div className={`relative w-full  max-w-3xl h-56 shadow-lg mx-auto rounded-xl overflow-hidden ${getBackgroundGradient()}`}>
+        <div className="text absolute w-full mb-6 h-full">
+            {children}
+        </div>
       {/* Sun */}
-      {sun && (
+      {/* {sun && (
         <div className="absolute top-6 right-6 w-16 h-16 rounded-full bg-yellow-300 shadow-lg shadow-yellow-300/50 animate-pulse"></div>
-      )}
+      )} */}
 
       {/* Stars */}
       {stars.map(star => (

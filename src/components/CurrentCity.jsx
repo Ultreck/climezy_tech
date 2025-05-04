@@ -25,7 +25,7 @@ const CurrentCity = () => {
             className="w-20 h-20"
           />
         </div>
-        <div className="text-white font-semibold text-xl px-10 mt-2">
+        <div className="text-white font-semibold text-xl px-10 mt-4">
           {searchLocation?.weather[0]?.description}
         </div>
         <div className="text-white font-semibold text-xl px-10 mt-2">

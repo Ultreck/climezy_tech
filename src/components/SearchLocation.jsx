@@ -65,7 +65,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
       const city = { name: cityName };
       setSelectedCity(city);
       onCityChange?.(city);
-      setOpenDropdown(false);
+    //   setOpenDropdown(false);
       setSearchTerm("");
     },
     [onCityChange]

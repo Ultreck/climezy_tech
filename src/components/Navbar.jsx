@@ -55,7 +55,7 @@ const Navbar = () => {
                 {i < 4 && (
                   <div
                     key={city?.name}
-                    className="text border-r px-2 w-auto flex items-center"
+                    className="text border-r lg:px-2 p-1 w-auto flex items-center"
                   >
                     <img
                       src={getWeatherIcon(city?.weather[0]?.icon)}

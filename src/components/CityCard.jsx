@@ -27,7 +27,7 @@ const CityCard = ({ city }) => {
   };
 
   return (
-    <div className="border-t rounded lg:p-4 w-auto p-2 flex justify-between items-center">
+    <div className="border-t rounded lg:p-4 w-auto p-3 flex justify-between items-center">
       <Link to={`/city/${city}`} className="grid grid-cols-3 w-3/4 lg:space-x-4">
       <div className="font-semibold text-xs lg:text-xl flex  items-center">{city}</div>
         {icon && (

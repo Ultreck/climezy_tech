@@ -36,50 +36,58 @@ const Navbar = () => {
               {" "}
               <div className="space-x-2 flex items-center">
                 <FaLocationDot />
-                <span className="text">{userLocation?.name?.slice(0, 5)+ '...'}</span>
+                <span className="text hidden lg:block">
+                  {userLocation?.name?.slice(0, 5) + "..."}
+                </span>
               </div>
             </TooltipTrigger>
             <TooltipContent className="bg-slate-600">
-              <p >Your current location</p>
+              <p>Your current location</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>
-      <div className="text-white bg-gray-800 ">
+      <div className="text-white bg-gray-800">
         {recentSearched?.length > 0 && (
-          <div className="text flex justify-start py-2 max-w-4xl mx-auto">
-            {recentSearched.map((city) => (
-              <div
-                key={city?.name}
-                className="text border-r px-2 w-auto flex items-center"
-              >
-                <img
-                  src={getWeatherIcon(city?.weather[0]?.icon)}
-                  alt={city?.weather[0]?.main}
-                  className="lg:w-10 w-5 lg:h-10 h-5"
-                />{" "}
-                <div
-                  className={`text-base flex justify-between lg:gap-3 gap-1 items-center w-full`}
-                >
-                  {city?.name.split(' ')[0]?.length > 5 ? city?.name.split(' ')[0]?.slice(0, 5) + '...' : city?.name.split(' ')[0]}
-                  <div className={`text flex items-center lg:space-x-1`}>
-                    <button
-                      className={`lg:text-xl text-xs ${
-                        city?.favorite && "text-orange-600"
-                      } `}
+          <div className="text flex justify-center py-2 max-w-4xl mx-auto">
+            {recentSearched.map((city, i) => (
+              <div>
+                {i < 4 && (
+                  <div
+                    key={city?.name}
+                    className="text border-r px-2 w-auto flex items-center"
+                  >
+                    <img
+                      src={getWeatherIcon(city?.weather[0]?.icon)}
+                      alt={city?.weather[0]?.main}
+                      className="lg:w-10 w-5 lg:h-10 h-5"
+                    />{" "}
+                    <div
+                      className={`lg:text-base text-xs flex justify-between lg:gap-3 gap-1 items-center w-full`}
                     >
-                      {city?.favorite ? <FaStar /> : <FaRegStar />}
-                    </button>
-                    {/* <span className="text">
+                      {city?.name.split(" ")[0]?.length > 5
+                        ? city?.name.split(" ")[0]?.slice(0, 5) + "..."
+                        : city?.name.split(" ")[0]}
+                      <div className={`text flex items-center lg:space-x-1`}>
+                        <button
+                          className={`lg:text-xl text-xs ${
+                            city?.favorite && "text-orange-600"
+                          } `}
+                        >
+                          {city?.favorite ? <FaStar /> : <FaRegStar />}
+                        </button>
+                        {/* <span className="text">
                       <SlOptionsVertical
                         onClick={() => {
                           handleRemoveRecentSearched(city?.name);
                         }}
                       />
                     </span> */}
-                    <RemovedPopover con='ico' city={city?.name}/>
+                        <RemovedPopover con="ico" city={city?.name} />
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             ))}
           </div>

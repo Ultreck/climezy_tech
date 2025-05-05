@@ -44,7 +44,7 @@ const updateRecentlySearchedCity = (city) => {
         const uniqueList = newList.filter((value, index, self) => {
             return index === self.findIndex((t) => t.name === value.name);
         })
-        return uniqueList.slice(-6).reverse();
+        return uniqueList;
     });
   };
   const handleRemoveRecentSearched = (cname) => {      

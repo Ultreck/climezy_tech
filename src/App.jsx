@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 
 const App = () => (
   <AppProvider>
-    <Navbar/>
+    {/* <Navbar/> */}
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />

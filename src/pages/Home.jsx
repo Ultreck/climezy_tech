@@ -7,6 +7,7 @@ import { getWeatherByCity } from "@/api/weather";
 import axios from "axios";
 import WeatherBackground from "@/components/WeatherBackground";
 import CurrentCity from "@/components/CurrentCity";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   const { favorites, removed, weatherCache, updateWeatherCache } =
@@ -19,36 +20,77 @@ const Home = () => {
         (c) => !removed.includes(c) && !favorites.includes(c)
       ),
     ]),
-  ];  
+  ];
+
+//   useEffect(() => {
+//     cities.forEach(async (city) => {
+//       if (!weatherCache[city]) {
+//         try {
+//           const data = await getWeatherByCity(city);
+//           updateWeatherCache(city, { ...data, favorite: false });
+//         } catch (err) {
+//           console.error(`Failed to fetch weather for ${city}`);
+//         }
+//       }
+//     });
+//   }, [cities]);
+
+const fetchWeatherForCities = async () => {
+    if (!navigator.onLine) {
+      console.log("Offline — using cached weather data.");
+      return;
+    }
+
+    for (const city of cities) {
+      try {
+        const data = await getWeatherByCity(city);
+        updateWeatherCache(city, {
+          ...data,
+          favorite: weatherCache[city]?.favorite || false,
+        });
+      } catch (err) {
+        console.error(`Failed to fetch weather for ${city}`, err);
+      }
+    }
+  };
 
   useEffect(() => {
-    cities.forEach(async (city) => {
-      if (!weatherCache[city]) {
-        try {
-          const data = await getWeatherByCity(city);
-          updateWeatherCache(city, {...data, favorite:false});
-        } catch (err) {
-          console.error(`Failed to fetch weather for ${city}`);
-        }
-      }
-    });
+    // Fetch on first load (only if online)
+    fetchWeatherForCities();
+
+    // Refetch when user comes back online
+    const handleOnline = () => {
+      console.log("Back online, refetching weather data...");
+      fetchWeatherForCities();
+    };
+
+    window.addEventListener("online", handleOnline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+    };
   }, [cities]);
 
   return (
+    <>
+        <Navbar/>
     <div className="text w-full min-h-screen">
       <div className="p-4 px-4 py-8 w-4xl mx-auto">
         <CurrentCity />
         <div className="text border mt-10 rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold mb-4 px-4 py-5">{cities?.length} largest cities</h1>
+          <h1 className="text-2xl font-bold mb-4 px-4 py-5">
+            {cities?.length} largest cities
+          </h1>
           {/* <WeatherBackground weatherCondition={'rain'}/> */}
           <div className="grid grid-cols-1">
-            {cities.map((city) => (
-              <CityCard key={city} city={city} />
+            {cities.map((city, i) => (
+              <div key={city}>{i <= 14 && <CityCard city={city} />}</div>
             ))}
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

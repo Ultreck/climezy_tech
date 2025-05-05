@@ -8,3 +8,8 @@ export const getWeatherByCity = async (city) => {
   const res = await axios.get(`${BASE_URL}?q=${encodedCity}&appid=${API_KEY}&units=metric`);  
   return res.data;
 };
+
+export const getWeatherByLatitudeLongitude = async (lat, lon) => {
+  const res = await axios.get(`${BASE_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);  
+  return res.data;
+};

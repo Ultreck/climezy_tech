@@ -52,7 +52,7 @@ const CityCard = ({ city }) => {
         <button onClick={toggleFavorite} className={`text-3xl ${isFavorite && 'text-orange-600'} `}>
           {isFavorite ? "★" : "☆"}
         </button>
-        <RemovedPopover/>
+        <RemovedPopover city={city}/>
       </div>
     </div>
   );

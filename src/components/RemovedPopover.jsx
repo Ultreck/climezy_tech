@@ -10,7 +10,10 @@ import { Button } from "@/components/ui/button"
 import { TfiTrash } from "react-icons/tfi";
 
 const RemovedPopover = ({con = ''}) => {
-    const {handleRemoveRecentSearched} = useAppContext();
+    const {handleRemoveRecentSearched, setRemoved} = useAppContext();
+    const removeCity = () => {
+        setRemoved((prev) => [...prev, city]);
+      };
   return (
     <Popover >
       <PopoverTrigger>
@@ -19,7 +22,7 @@ const RemovedPopover = ({con = ''}) => {
       <PopoverContent side={'left'} className="w-auto h-auto p-0 bg-transparent border-0">
         <Button  onPress={() => {
             console.log(city?.name);
-            handleRemoveRecentSearched(city?.name);
+            con === 'ico' ? handleRemoveRecentSearched(city?.name) : removeCity();
           }}>
             Remove
         </Button>

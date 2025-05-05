@@ -23,7 +23,7 @@ const Navbar = () => {
   };
   return (
     <div className="w-full bg-slate-900 ">
-      <nav className="bg-slate-900 w-4xl mx-auto p-4 text-white flex justify-between items-center">
+      <nav className="bg-slate-900 lg:w-4xl mx-auto p-4 text-white flex justify-between items-center">
         <Link to="/" className="text">
           <SiAccuweather size={30} />
         </Link>
@@ -36,7 +36,7 @@ const Navbar = () => {
               {" "}
               <div className="space-x-2 flex items-center">
                 <FaLocationDot />
-                <span className="text">{userLocation?.name}</span>
+                <span className="text">{userLocation?.name?.slice(0, 5)+ '...'}</span>
               </div>
             </TooltipTrigger>
             <TooltipContent className="bg-slate-600">
@@ -56,15 +56,15 @@ const Navbar = () => {
                 <img
                   src={getWeatherIcon(city?.weather[0]?.icon)}
                   alt={city?.weather[0]?.main}
-                  className="w-10 h-10"
+                  className="lg:w-10 w-5 lg:h-10 h-5"
                 />{" "}
                 <div
-                  className={`text-base flex justify-between gap-3 items-center w-full`}
+                  className={`text-base flex justify-between lg:gap-3 gap-1 items-center w-full`}
                 >
-                  {city?.name.split(' ')[0]?.length > 6 ? city?.name.split(' ')[0]?.slice(0, 6) + '...' : city?.name.split(' ')[0]}
-                  <div className={`text  flex items-center space-x-1`}>
+                  {city?.name.split(' ')[0]?.length > 5 ? city?.name.split(' ')[0]?.slice(0, 5) + '...' : city?.name.split(' ')[0]}
+                  <div className={`text flex items-center lg:space-x-1`}>
                     <button
-                      className={`text-xl ${
+                      className={`lg:text-xl text-xs ${
                         city?.favorite && "text-orange-600"
                       } `}
                     >

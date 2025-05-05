@@ -19,7 +19,7 @@ const RemovedPopover = ({con = '', city = ''}) => {
   return (
     <Popover >
       <PopoverTrigger>
-       {con === 'ico'? <SlOptionsVertical/> : <TfiTrash />}
+       {con === 'ico'? <SlOptionsVertical className="text-xs"/> : <TfiTrash className="text-sm"/>}
       </PopoverTrigger>
       <PopoverContent side={'left'} className="w-auto h-auto p-0 bg-transparent border-0">
         <Button  onClick={() => {

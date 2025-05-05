@@ -95,13 +95,13 @@ const CitySelector = ({ disabled, onCityChange }) => {
           role="combobox"
           aria-expanded={openDropdown}
           disabled={disabled}
-          className="w-[400px] py-6 cursor-pointer bg-slate-700 hover:bg-slate-600 justify-between"
+          className="lg:w-[400px] w-56 py-6 cursor-pointer bg-slate-700 hover:bg-slate-600 justify-between"
         >
           {selectedCity ? selectedCity.name : "Select City..."}
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-100" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[400px] p-0">
+      <PopoverContent className="lg:w-[400px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             placeholder="Search city..."
@@ -112,7 +112,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
           <CommandList>
             <CommandEmpty>Type to search for the city you want...</CommandEmpty>
             <CommandGroup className="p-0 ">
-              <ScrollArea className="[350px] pb-5 px-0">
+              <ScrollArea className=" pb-5 px-0">
                 {searchTerm ? (
                   filteredCities.map((cityName) => (
                     <CommandItem

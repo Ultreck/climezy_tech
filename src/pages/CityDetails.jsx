@@ -12,6 +12,19 @@ import {
 import { SiAccuweather } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
+import { BsThermometer } from "react-icons/bs";
+import { PiThermometerHot } from "react-icons/pi";
+import { ImDroplet } from "react-icons/im";
+import { CiDroplet } from "react-icons/ci";
+import { WiRaindrops } from "react-icons/wi";
+import { FaCompress } from "react-icons/fa";
+import { IoIosArrowRoundUp } from "react-icons/io";
+import { IoIosArrowRoundDown } from "react-icons/io";
+import { LuWind } from "react-icons/lu";
+import { GoEye } from "react-icons/go";
+import { CiCloudOn } from "react-icons/ci";
+
+
 const CityDetails = () => {
   const { weatherCache, searchLocation, userLocation } = useAppContext();
   const city =
@@ -130,38 +143,48 @@ const CityDetails = () => {
           </WeatherBackground>
 
           {/* Hourly Forecast */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-xl shadow-md px-6 py-10">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Weather Today in {weatherData?.name}, {weatherData?.sys?.country}
             </h2>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <h3 className="font-semibold">Feels Like</h3>
+            <div className="grid grid-cols-2 gap-5">
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><BsThermometer />High/Low</h3>
+                <p className="text">
+                  {Math.round(weatherData?.main?.temp_max)}°/{Math.round(weatherData?.main?.temp_min)}°
+                </p>
+              </div>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><PiThermometerHot />Feels Like</h3>
                 <p className="text">
                   {Math.round(weatherData?.main?.feels_like)}°
                 </p>
               </div>
-              <div>
-                <h3 className="font-semibold">Humidity</h3>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><ImDroplet />Humidity</h3>
                 <p className="text">{weatherData?.main?.humidity}%</p>
               </div>
-              <div>
-                <h3 className="font-semibold">Wind</h3>
-                <p className="text">{weatherData?.wind?.speed} km/h</p>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><div className="text flex items-center"><CiDroplet /><WiRaindrops className="-ml-2 -mt-2" /> </div>Dew point</h3>
+                <p className="text">{Math.round(weatherData?.main?.temp_min)}°</p>
               </div>
-              <div>
-                <h3 className="font-semibold">Pressure</h3>
-                <p className="text">{weatherData?.main?.pressure} mb</p>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><LuWind />Wind</h3>
+                <p className="text flex items-center">{weatherData?.wind?.speed > 1013? <IoIosArrowRoundUp />: <IoIosArrowRoundDown />}{weatherData?.wind?.speed} km/h</p>
               </div>
-              <div>
-                <h3 className="font-semibold">Visibility</h3>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><FaCompress />Pressure</h3>
+                <p className="text flex items-center">{weatherData?.main?.pressure > 1013? <IoIosArrowRoundUp />: <IoIosArrowRoundDown />}{weatherData?.main?.pressure} mb</p>
+              </div>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><GoEye />Visibility</h3>
                 <p className="text">
-                  {(weatherData?.visibility / 1000).toFixed(1)} km
+                  {(weatherData?.visibility / 1000).toFixed(1)} Km
                 </p>
               </div>
-              <div>
-                <h3 className="font-semibold">Cloud Cover</h3>
+              <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
+                <h3 className="font-semibold flex items-center gap-1"><CiCloudOn />Cloud Cover</h3>
                 <p className="text">{weatherData?.clouds?.all}%</p>
               </div>
             </div>

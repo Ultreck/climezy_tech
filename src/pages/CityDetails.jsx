@@ -80,7 +80,7 @@ const CityDetails = () => {
           </TooltipProvider>
         </div>
       </div>
-      <div className="min-h-screen relative bg-gray-100 py-8 px-4">
+      <div className="min-h-screen relative bg-gray-100 lg:py-8 px-4">
         <div className="max-w-3xl mx-auto space-y-7">
           {/* Header */}
           <div className="text-center mb-6 z-30">
@@ -97,31 +97,31 @@ const CityDetails = () => {
               {/* Current Weather */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-8xl font-mono font-bold">
+                  <div className="lg:text-8xl text-6xl font-mono font-bold">
                     {Math.round(weatherData?.main?.temp)}°C
                   </div>
                 </div>
                 <img
                   src={getWeatherIcon(weatherData?.weather[0]?.icon)}
                   alt={weatherData?.weather[0]?.main}
-                  className="w-24 h-24"
+                  className="lg:w-24 w-16 lg:h-24 h-16"
                 />
               </div>
 
-              <div className="border-t border-gray-200 my-8"></div>
+              <div className="border-t border-gray-200 lg:my-8 my-5"></div>
 
-              <div className="text flex justify-between items-center">
+              <div className="text lg:flex justify-between items-center">
                 <div className="text ">
-                  <div className="text-2xl mb-3 font-semibold capitalize">
+                  <div className="lg:text-2xl text-lg mb-3 font-semibold capitalize">
                     {weatherData?.weather[0]?.description}
                   </div>
-                  <div className="text-2xl font-semibold">
+                  <div className="lg:text-2xl text-lg font-semibold">
                     Day {Math.round(weatherData?.main?.temp_max)}° • Night{" "}
                     {Math.round(weatherData?.main?.temp_min)}°
                   </div>
                 </div>
                 <div className="text ">
-                  <div className="items-center h-auto justify-end flex px-2 z-30  gap-12">
+                  <div className="items-center mt-7 lg:mt-0 h-auto lg:justify-end flex lg:px-2 z-30  gap-12">
                     <p className="text">
                       <span className="text">Sunrise</span>
                       <span className="text flex mt-2 items-center gap-1">
@@ -148,7 +148,7 @@ const CityDetails = () => {
               Weather Today in {weatherData?.name}, {weatherData?.sys?.country}
             </h2>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid lg:grid-cols-2 gap-5">
               <div className="flex p-0 justify-between border-b items-center pr-2 mt-6">
                 <h3 className="font-semibold flex items-center gap-1"><BsThermometer />High/Low</h3>
                 <p className="text">

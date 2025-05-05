@@ -7,15 +7,14 @@ import {
 import { useAppContext } from "../context/AppContext";
 import { SlOptionsVertical } from "react-icons/sl";
 import { Button } from "@/components/ui/button"
+import { TfiTrash } from "react-icons/tfi";
 
-const RemovedPopover = () => {
+const RemovedPopover = ({con = ''}) => {
     const {handleRemoveRecentSearched} = useAppContext();
   return (
     <Popover >
       <PopoverTrigger>
-        <SlOptionsVertical
-         
-        />
+       {con === 'ico'? <SlOptionsVertical/> : <TfiTrash />}
       </PopoverTrigger>
       <PopoverContent side={'left'} className="w-auto h-auto p-0 bg-transparent border-0">
         <Button  onPress={() => {

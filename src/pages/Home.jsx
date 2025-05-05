@@ -10,7 +10,6 @@ import CurrentCity from "@/components/CurrentCity";
 import Navbar from "../components/Navbar";
 import { getWeatherByCoords } from "../api/weather";
 import { useGeolocation } from "../hooks/useGeolocation";
-import { TfiTrash } from "react-icons/tfi";
 
 
 const Home = () => {

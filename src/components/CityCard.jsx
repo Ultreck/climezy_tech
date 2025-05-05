@@ -5,6 +5,7 @@ import {
     PopoverContent,
     PopoverTrigger,
   } from "@/components/ui/popover"
+  import { TfiTrash } from "react-icons/tfi";
   
 const CityCard = ({ city }) => {
   const { weatherCache, favorites, setFavorites, removed, setRemoved } = useAppContext();
@@ -54,7 +55,9 @@ const CityCard = ({ city }) => {
         <button onClick={toggleFavorite} className={`text-3xl ${isFavorite && 'text-orange-600'} `}>
           {isFavorite ? "★" : "☆"}
         </button>
-        <button onClick={removeCity} className="text-xl">🗑</button>
+        <button onClick={removeCity} className="text-xl">
+        <TfiTrash />
+        </button>
       </div>
     </div>
   );

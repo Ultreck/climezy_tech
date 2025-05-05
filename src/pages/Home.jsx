@@ -12,7 +12,7 @@ import { getWeatherByCoords } from "../api/weather";
 import { useGeolocation } from "../hooks/useGeolocation";
 
 const Home = () => {
-  const { favorites, removed, weatherCache, updateWeatherCache } =
+  const { favorites, removed, weatherCache, updateWeatherCache, addUserLocation } =
     useAppContext();
 
   const cities = [
@@ -74,7 +74,7 @@ const Home = () => {
     try {
       const weatherData = await getWeatherByCoords(latitude, longitude);
       console.log(weatherData);
-      
+      addUserLocation(weatherData);
     //   updateWeatherCache(weatherData.name, weatherData);
     } catch (error) {
       console.error("Failed to fetch weather from geolocation:", error);

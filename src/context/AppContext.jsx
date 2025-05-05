@@ -18,6 +18,9 @@ export const AppProvider = ({ children }) => {
   const [searchLocation, setSearchLocation] = useState(() =>
     JSON.parse(localStorage.getItem("searched-location")) || {}
   );
+  const [userLocation, setUserLocation] = useState(() =>
+    JSON.parse(localStorage.getItem("uer-location")) || {}
+  );
   const [notes, setNotes] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || {}
   );
@@ -29,14 +32,14 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("notes", JSON.stringify(notes));
     localStorage.setItem("recently-searched", JSON.stringify(recentSearched));
     localStorage.setItem("searched-location", JSON.stringify(searchLocation));
-  }, [favorites, removed, weatherCache, recentSearched, searchLocation, notes]);
+}, [favorites, removed, weatherCache, recentSearched, searchLocation, notes]);
 
-  const updateWeatherCache = (city, data) => {
+const updateWeatherCache = (city, data) => {
     setWeatherCache((prev) => ({ ...prev, [city]: data }));
-  };
+};
 
-  const updateRecentlySearchedCity = (city) => {
-      setRecentSearched((prev) => {
+const updateRecentlySearchedCity = (city) => {
+    setRecentSearched((prev) => {
         const newList = [...prev, city];
         const uniqueList = newList.filter((value, index, self) => {
             return index === self.findIndex((t) => t.name === value.name);
@@ -45,10 +48,15 @@ export const AppProvider = ({ children }) => {
     });
   };
   const handleRemoveRecentSearched = (cname) => {
-    console.log(cname);
+      console.log(cname);
+      
+      setRecentSearched((prev) => prev.filter((city) => city.name !== cname));    
+    };
     
-    setRecentSearched((prev) => prev.filter((city) => city.name !== cname));    
-  };
+    const addUserLocation = (location) => {
+        setUserLocation(location);
+        localStorage.setItem("user-location", JSON.stringify(location));
+  }
 
   const updateFavoriteStatus = (cityName, isFavorite) => {
     setRecentSearched((prev) => {
@@ -62,21 +70,23 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        favorites,
-        setFavorites,
-        removed,
-        setRemoved,
-        weatherCache,
-        updateWeatherCache,
-        notes,
-        setNotes,
-        setSearchLocation,
-        searchLocation,
-        recentSearched,
-        setRecentSearched,
-        updateRecentlySearchedCity,
-        updateFavoriteStatus,
-        handleRemoveRecentSearched,
+          recentSearched,
+          searchLocation,
+          userLocation,
+          weatherCache,
+          favorites,
+          removed,
+          notes,
+          setNotes,
+          setRemoved,
+          setFavorites,
+          addUserLocation,
+          setRecentSearched,
+          setSearchLocation,
+          updateWeatherCache,
+          updateFavoriteStatus,
+          updateRecentlySearchedCity,
+          handleRemoveRecentSearched,
       }}
     >
       {children}

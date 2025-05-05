@@ -1,6 +1,11 @@
 import { useAppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
-
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+  } from "@/components/ui/popover"
+  
 const CityCard = ({ city }) => {
   const { weatherCache, favorites, setFavorites, removed, setRemoved } = useAppContext();
   const weather = weatherCache[city];

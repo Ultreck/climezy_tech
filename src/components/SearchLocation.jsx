@@ -20,6 +20,8 @@ import cities from "cities-list";
 import { useAppContext } from "../context/AppContext";
 import { getWeatherByCity } from "../api/weather";
 import { SlOptionsVertical } from "react-icons/sl";
+import RemovedPopover from "./RemovedPopover";
+
 
 const CitySelector = ({ disabled, onCityChange }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -173,12 +175,13 @@ const CitySelector = ({ disabled, onCityChange }) => {
                             >
                               {city?.favorite ? "★" : "☆"}
                             </button>
-                            <span className="text">
+                            {/* <span className="text">
                               <SlOptionsVertical onClick={() => {
                             console.log(city?.name);
                                 handleRemoveRecentSearched(city?.name);
                                 }} />
-                            </span>
+                            </span> */}
+                            <RemovedPopover/>
                           </div>
                         </div>
                       </CommandItem>

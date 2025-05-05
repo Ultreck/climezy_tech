@@ -75,7 +75,7 @@ const Home = () => {
         <div className="p-4 px-4 py-8 lg:w-4xl mx-auto">
           <CurrentCity />
           <div className="text border mt-10 rounded-lg shadow-md">
-            <h1 className="text-2xl font-bold mb-4 px-4 py-5">
+            <h1 className="lg:text-2xl text-xl font-bold mb-4 px-4 lg:py-5 py-3">
               Largest cities
             </h1>
             {/* <WeatherBackground weatherCondition={'rain'}/> */}

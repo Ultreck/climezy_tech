@@ -41,9 +41,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
   
   const isFavorite = favorites.includes(selectedCity?.name);
   const toggleFavorite = (name, favorite) => {
-    console.log(name, favorite);
-    
-    updateFavoriteStatus(name, favorite);
+        updateFavoriteStatus(name, favorite);
     setFavorites((prev) =>
       isFavorite
         ? prev.filter((c) => c !== selectedCity?.name)

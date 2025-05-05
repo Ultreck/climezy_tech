@@ -27,19 +27,19 @@ const CityCard = ({ city }) => {
   };
 
   return (
-    <div className="border-t rounded p-4 flex justify-between items-center">
-      <Link to={`/city/${city}`} className="grid grid-cols-3 w-3/4 space-x-4">
-      <div className="font-semibold text-xl flex  items-center">{city}</div>
+    <div className="border-t rounded lg:p-4 w-auto p-2 flex justify-between items-center">
+      <Link to={`/city/${city}`} className="grid grid-cols-3 w-3/4 lg:space-x-4">
+      <div className="font-semibold text-xs lg:text-xl flex  items-center">{city}</div>
         {icon && (
           <img
             src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
             alt="Weather Icon"
-            className="w-12 h-12"
+            className="lg:w-12 lg:h-12 w-8 h-8 flex-shrink-0"
           />
         )}
         <div>
           {temp !== undefined ? (
-            <div className="text-xl flex h-full justify-center items-center text-gray-700">
+            <div className="lg:text-xl text-xs flex h-full justify-center items-center text-gray-700">
               <div>{temp}°C</div>
               {/* <div>💧 {humidity}% | 🌬 {windSpeed} m/s</div> */}
             </div>
@@ -49,7 +49,7 @@ const CityCard = ({ city }) => {
         </div>
       </Link>
       <div className="space-x-2 ml-4 flex-shrink-0">
-        <button onClick={toggleFavorite} className={`text-3xl ${isFavorite && 'text-orange-600'} `}>
+        <button onClick={toggleFavorite} className={`lg:text-3xl ${isFavorite && 'text-orange-600'} `}>
           {isFavorite ? "★" : "☆"}
         </button>
         <RemovedPopover city={city}/>

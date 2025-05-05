@@ -72,7 +72,7 @@ const Home = () => {
     <>
       <Navbar />
       <div className="text w-full min-h-screen">
-        <div className="p-4 px-4 py-8 w-4xl mx-auto">
+        <div className="p-4 px-4 py-8 lg:w-4xl mx-auto">
           <CurrentCity />
           <div className="text border mt-10 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4 px-4 py-5">

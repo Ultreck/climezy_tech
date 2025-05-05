@@ -13,6 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import RemovedPopover from "./RemovedPopover";
 
 const Navbar = () => {
   const { recentSearched, handleRemoveRecentSearched, userLocation } =
@@ -60,8 +61,8 @@ const Navbar = () => {
                 <div
                   className={`text-base flex justify-between gap-3 items-center w-full`}
                 >
-                  {city?.name}, {city?.sys?.country}
-                  <div className={`text  flex items-center space-x-2`}>
+                  {city?.name.split(' ')[0]?.length > 6 ? city?.name.split(' ')[0]?.slice(0, 6) + '...' : city?.name.split(' ')[0]}
+                  <div className={`text  flex items-center space-x-1`}>
                     <button
                       className={`text-xl ${
                         city?.favorite && "text-orange-600"
@@ -69,13 +70,14 @@ const Navbar = () => {
                     >
                       {city?.favorite ? <FaStar /> : <FaRegStar />}
                     </button>
-                    <span className="text">
+                    {/* <span className="text">
                       <SlOptionsVertical
                         onClick={() => {
                           handleRemoveRecentSearched(city?.name);
                         }}
                       />
-                    </span>
+                    </span> */}
+                    <RemovedPopover con='ico' city={city?.name}/>
                   </div>
                 </div>
               </div>

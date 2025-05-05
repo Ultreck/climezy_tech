@@ -71,10 +71,10 @@ const CityDetails = () => {
         <div className="max-w-3xl mx-auto space-y-7">
           {/* Header */}
           <div className="text-center mb-6 z-30">
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-4xl font-bold text-gray-800">
               {weatherData?.name}, {weatherData?.sys?.country}
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-base">
               As of {new Date(weatherData?.dt * 1000).toLocaleTimeString()}
             </p>
           </div>
@@ -84,7 +84,7 @@ const CityDetails = () => {
               {/* Current Weather */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-7xl font-bold">
+                  <div className="text-8xl font-mono font-bold">
                     {Math.round(weatherData?.main?.temp)}°C
                   </div>
                 </div>
@@ -95,11 +95,11 @@ const CityDetails = () => {
                 />
               </div>
 
-              <div className="border-t border-gray-200 my-2"></div>
+              <div className="border-t border-gray-200 my-8"></div>
 
               <div className="text flex justify-between items-center">
                 <div className="text ">
-                  <div className="text-2xl font-semibold capitalize">
+                  <div className="text-2xl mb-3 font-semibold capitalize">
                     {weatherData?.weather[0]?.description}
                   </div>
                   <div className="text-2xl font-semibold">
@@ -108,17 +108,17 @@ const CityDetails = () => {
                   </div>
                 </div>
                 <div className="text ">
-                  <div className="items-center w-60 h-10 flex px-2 z-30  gap-10">
+                  <div className="items-center h-auto justify-end flex px-2 z-30  gap-12">
                     <p className="text">
                       <span className="text">Sunrise</span>
-                      <span className="text flex items-center gap-1">
+                      <span className="text flex mt-2 items-center gap-1">
                         {formatTime(weatherData?.sys?.sunrise)}{" "}
                         <TbSunrise className="text-orange-500" />
                       </span>
                     </p>
                     <p className="text">
                       <span className="text">Sunset</span>
-                      <span className="text flex items-center gap-1">
+                      <span className="text flex mt-2 items-center gap-1">
                         {formatTime(weatherData?.sys?.sunset)}{" "}
                         <FiSunset className="text-orange-500" />
                       </span>

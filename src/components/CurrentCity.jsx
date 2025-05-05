@@ -17,8 +17,10 @@ const CurrentCity = () => {
               <p className="text">
                 {searchLocation?.name}, {searchLocation?.sys?.country}
               </p>
-              <p className="text">
-                As of {new Date(searchLocation?.dt * 1000).toLocaleTimeString()}
+              <p className="text-lg font-light">
+                As of <span className="text font-mono">
+                {new Date(searchLocation?.dt * 1000).toLocaleTimeString()}
+                </span>
               </p>
             </div>
             <div className="text-white flex font-semibold text-7xl px-10 mt-7 ">

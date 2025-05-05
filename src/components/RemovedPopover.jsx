@@ -9,9 +9,11 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { Button } from "@/components/ui/button"
 import { TfiTrash } from "react-icons/tfi";
 
-const RemovedPopover = ({con = ''}) => {
+const RemovedPopover = ({con = '', city = ''}) => {
     const {handleRemoveRecentSearched, setRemoved} = useAppContext();
     const removeCity = () => {
+        console.log('clicked');
+        
         setRemoved((prev) => [...prev, city]);
       };
   return (
@@ -20,8 +22,7 @@ const RemovedPopover = ({con = ''}) => {
        {con === 'ico'? <SlOptionsVertical/> : <TfiTrash />}
       </PopoverTrigger>
       <PopoverContent side={'left'} className="w-auto h-auto p-0 bg-transparent border-0">
-        <Button  onPress={() => {
-            console.log(city?.name);
+        <Button  onClick={() => {
             con === 'ico' ? handleRemoveRecentSearched(city?.name) : removeCity();
           }}>
             Remove

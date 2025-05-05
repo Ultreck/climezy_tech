@@ -181,7 +181,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
                                 handleRemoveRecentSearched(city?.name);
                                 }} />
                             </span> */}
-                            <RemovedPopover con='ico'/>
+                            <RemovedPopover con='ico' city={city?.name}/>
                           </div>
                         </div>
                       </CommandItem>

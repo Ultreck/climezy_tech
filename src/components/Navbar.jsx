@@ -17,8 +17,6 @@ import {
 const Navbar = () => {
   const { recentSearched, handleRemoveRecentSearched, userLocation } =
     useAppContext();
-  console.log(userLocation);
-
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   };

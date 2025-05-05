@@ -134,7 +134,7 @@ const WeatherBackground = ({ weatherCondition, children }) => {
 
   return (
     <div
-      className={`relative w-full  max-w-3xl h-56 shadow-lg mx-auto rounded-xl overflow-hidden ${getBackgroundGradient()}`}
+      className={`relative w-full  max-w-3xl h-80 shadow-lg mx-auto rounded-xl overflow-hidden ${getBackgroundGradient()}`}
     >
       <div className="text absolute w-full mb-6 h-full">{children}</div>
       {/* Sun */}

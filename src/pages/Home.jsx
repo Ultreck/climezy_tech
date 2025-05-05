@@ -26,19 +26,6 @@ const Home = () => {
   ];
   
 
-  //   useEffect(() => {
-  //     cities.forEach(async (city) => {
-  //       if (!weatherCache[city]) {
-  //         try {
-  //           const data = await getWeatherByCity(city);
-  //           updateWeatherCache(city, { ...data, favorite: false });
-  //         } catch (err) {
-  //           console.error(`Failed to fetch weather for ${city}`);
-  //         }
-  //       }
-  //     });
-  //   }, [cities]);
-
   const fetchWeatherForCities = async () => {
     if (!navigator.onLine) {
       console.log("Offline — using cached weather data.");

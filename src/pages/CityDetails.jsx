@@ -83,8 +83,8 @@ const CityDetails = () => {
       <div className="min-h-screen relative bg-gray-100 lg:py-8 px-4">
         <div className="max-w-3xl mx-auto space-y-7">
           {/* Header */}
-          <div className="text-center mb-6 z-30">
-            <h1 className="text-4xl font-bold text-gray-800">
+          <div className="text-center mb-6 z-30 pt-6 lg:pt-0">
+            <h1 className="lg:text-4xl text-3xl font-bold text-gray-800">
               {weatherData?.name}, {weatherData?.sys?.country}
             </h1>
             <p className="text-gray-600 text-base">

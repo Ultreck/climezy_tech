@@ -51,7 +51,7 @@ const CityDetails = () => {
   return (
     <>
       <div className="text py-3">
-        <div className="text w-4xl flex justify-between items-center px-4 mx-auto">
+        <div className="text lg:w-4xl flex justify-between items-center px-4 mx-auto">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>

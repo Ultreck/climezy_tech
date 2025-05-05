@@ -33,7 +33,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
     updateRecentlySearchedCity,
     recentSearched,
     updateFavoriteStatus,
-    handleRemoveRecentSearched,
+    clearAll,
     updateWeatherCache,
   } = useAppContext();
   const [selectedCity, setSelectedCity] = useState(searchLocation || null);
@@ -148,9 +148,11 @@ const CitySelector = ({ disabled, onCityChange }) => {
                 ) : (
                   <>
                     {!!recentSearched?.length && (
-                      <div className="text-2xl flex justify-between mt-5 py-2 px-2">
+                      <div className="text-xl flex justify-between mt-5 py-2 px-2">
                         Recent Searches
-                        <button className="text-lg cursor-pointer">
+                        <button onClick={() => {
+                            clearAll();
+                        }} className="text-sm hover:bg-slate-100 px-2 rounded cursor-pointer">
                             Clear All
                         </button>
                       </div>
@@ -175,12 +177,6 @@ const CitySelector = ({ disabled, onCityChange }) => {
                             >
                               {city?.favorite ? "★" : "☆"}
                             </button>
-                            {/* <span className="text">
-                              <SlOptionsVertical onClick={() => {
-                            console.log(city?.name);
-                                handleRemoveRecentSearched(city?.name);
-                                }} />
-                            </span> */}
                             <RemovedPopover con='ico' city={city?.name}/>
                           </div>
                         </div>

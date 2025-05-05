@@ -6,11 +6,13 @@ import NotFound from "./pages/NotFound";
 import CityDetails from "./pages/CityDetails";
 import Navbar from "./components/Navbar";
 import { Toaster } from "sonner";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => (
   <AppProvider>
     {/* <Navbar/> */}
     <Router>
+    <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/city/:name" element={<CityDetails />} />

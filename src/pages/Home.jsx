@@ -24,6 +24,7 @@ const Home = () => {
       ),
     ]),
   ];
+  
 
   //   useEffect(() => {
   //     cities.forEach(async (city) => {

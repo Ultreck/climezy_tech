@@ -64,6 +64,10 @@ const updateRecentlySearchedCity = (city) => {
     });
   };
 
+  const clearAll = () => {
+    setRecentSearched([]);
+  };
+
   
   return (
     <AppContext.Provider
@@ -76,6 +80,7 @@ const updateRecentlySearchedCity = (city) => {
           removed,
           notes,
           setNotes,
+          clearAll,
           setRemoved,
           setFavorites,
           addUserLocation,

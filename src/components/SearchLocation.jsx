@@ -51,7 +51,7 @@ const CitySelector = ({ disabled, onCityChange }) => {
 
   const cityArray = useMemo(() => Object.keys(cities), []);
 
-  const debouncedSearch = useDebounce(searchTerm, 250);
+  const debouncedSearch = useDebounce(searchTerm, 500);
 
   const filteredCities = useMemo(() => {
     if (!debouncedSearch) return [];

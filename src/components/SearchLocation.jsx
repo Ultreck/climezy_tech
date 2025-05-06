@@ -59,14 +59,6 @@ const CitySelector = ({ disabled, onCityChange }) => {
       .slice(0, 200);
   }, [searchTerm, cityArray]);
 
-  //   const handleCitySelect = (cityName) => {
-  //     const city = { name: cityName };
-  //     setSelectedCity(city);
-  //     onCityChange?.(city);
-  //     setOpenDropdown(false);
-  //     setSearchTerm("");
-  //   };
-
   const handleCitySelect = useCallback(
     async (cityName) => {
       try {

@@ -1,7 +1,6 @@
 import React from "react";
 import SearchLocation from "./SearchLocation";
 import { useAppContext } from "../context/AppContext";
-import { SlOptionsVertical } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { SiAccuweather } from "react-icons/si";
 import { FaRegStar } from "react-icons/fa";
@@ -16,7 +15,7 @@ import {
 import RemovedPopover from "./RemovedPopover";
 
 const Navbar = () => {
-  const { recentSearched, handleRemoveRecentSearched, userLocation } =
+  const { recentSearched, userLocation } =
     useAppContext();
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -51,10 +50,9 @@ const Navbar = () => {
         {recentSearched?.length > 0 && (
           <div className="text flex justify-center py-2 max-w-4xl mx-auto">
             {recentSearched.map((city, i) => (
-              <div>
+              <div key={i}>
                 {i < 4 && (
                   <div
-                    key={city?.name}
                     className="text border-r lg:px-2 p-1 w-auto flex items-center"
                   >
                     <img
@@ -76,13 +74,6 @@ const Navbar = () => {
                         >
                           {city?.favorite ? <FaStar /> : <FaRegStar />}
                         </button>
-                        {/* <span className="text">
-                      <SlOptionsVertical
-                        onClick={() => {
-                          handleRemoveRecentSearched(city?.name);
-                        }}
-                      />
-                    </span> */}
                         <RemovedPopover con="ico" city={city?.name} />
                       </div>
                     </div>

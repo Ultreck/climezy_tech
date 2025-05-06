@@ -14,8 +14,8 @@ const CurrentCity = () => {
         >
           <Link to={`/city/${searchLocation?.name}`}>
             <div className="text-white border-b border-slate-500 lg:text-2xl font-semibold flex justify-between py-3 px-8 items-center bg-slate-700 ">
-              <p className="text">
-                <span className="text">Your location</span>
+              <p className="text grid">
+                <span className="lg:text-lg font-light">Your location</span>
                 {searchLocation?.name}, {searchLocation?.sys?.country}
               </p>
               <p className="lg:text-lg font-light">

@@ -87,7 +87,7 @@ const CityDetails = () => {
             <h1 className="lg:text-4xl text-3xl font-bold text-gray-800">
               {weatherData?.name}, {weatherData?.sys?.country}
             </h1>
-            <p className="text-gray-600 text-base">
+            <p className="text-gray-600 mt-1 text-base">
               As of {new Date(weatherData?.dt * 1000).toLocaleTimeString()}
             </p>
           </div>

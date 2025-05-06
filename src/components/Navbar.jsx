@@ -15,8 +15,7 @@ import {
 import RemovedPopover from "./RemovedPopover";
 
 const Navbar = () => {
-  const { recentSearched, userLocation } =
-    useAppContext();
+  const { recentSearched, userLocation } = useAppContext();
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   };
@@ -29,22 +28,24 @@ const Navbar = () => {
         <div className="text mx-auto">
           <SearchLocation />
         </div>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              {" "}
-              <div className="space-x-2 flex items-center">
-                <FaLocationDot />
-                <span className="text hidden lg:block">
-                  {userLocation?.name?.slice(0, 5) + "..."}
-                </span>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="bg-slate-600">
-              <p>Your current location</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        {userLocation?.name && (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                {" "}
+                <div className="space-x-2 flex items-center">
+                  <FaLocationDot />
+                  <span className="text hidden lg:block">
+                    {userLocation?.name?.slice(0, 5) + "..."}
+                  </span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="bg-slate-600">
+                <p>Your current location</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
       </nav>
       <div className="text-white bg-gray-800">
         {recentSearched?.length > 0 && (
@@ -52,9 +53,7 @@ const Navbar = () => {
             {recentSearched.map((city, i) => (
               <div key={i}>
                 {i < 4 && (
-                  <div
-                    className="text border-r lg:px-2 p-1 w-auto flex items-center"
-                  >
+                  <div className="text border-r lg:px-2 p-1 w-auto flex items-center">
                     <img
                       src={getWeatherIcon(city?.weather[0]?.icon)}
                       alt={city?.weather[0]?.main}

@@ -56,15 +56,15 @@ const Home = () => {
   }, []);
 
 
-  useGeolocation(async ({ latitude, longitude }) => {
-    try {
-      const weatherData = await getWeatherByCoords(latitude, longitude);
-      addUserLocation(weatherData);
-    } catch (error) {
-      console.error("Failed to fetch weather from geolocation:", error);
-    }
-  });
-console.log(cities);
+//   useGeolocation(async ({ latitude, longitude }) => {
+//     try {
+//       const weatherData = await getWeatherByCoords(latitude, longitude);
+//       addUserLocation(weatherData);
+//     } catch (error) {
+//       console.error("Failed to fetch weather from geolocation:", error);
+//     }
+//   });
+// console.log(cities);
 
   return (
     <>

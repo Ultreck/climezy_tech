@@ -66,7 +66,6 @@ const updateRecentlySearchedCity = (city) => {
 
   const clearAll = () => {
     setRecentSearched([]);
-    
   };
 
   

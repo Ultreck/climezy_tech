@@ -15,11 +15,13 @@ const CurrentCity = () => {
           <Link to={`/city/${searchLocation?.name}`}>
             <div className="text-white border-b border-slate-500 lg:text-2xl font-semibold flex justify-between py-3 px-8 items-center bg-slate-700 ">
               <p className="text">
+                <span className="text">Your location</span>
                 {searchLocation?.name}, {searchLocation?.sys?.country}
               </p>
               <p className="lg:text-lg font-light">
-                As of <span className="text font-mono">
-                {new Date(searchLocation?.dt * 1000).toLocaleTimeString()}
+                As of{" "}
+                <span className="text font-mono">
+                  {new Date(searchLocation?.dt * 1000).toLocaleTimeString()}
                 </span>
               </p>
             </div>
@@ -41,14 +43,15 @@ const CurrentCity = () => {
           </Link>
         </div>
       )}
-       {!searchLocation?.name && userLocation?.name && (
+      {!searchLocation?.name && userLocation?.name && (
         <div
           style={{ backgroundImage: `url(${img})` }}
-          className="relative bg-blend-overlay bg-slate-700 w-xs cursor-pointer lg:w-full lg:max-w-4xl lg:h-72 lg:mx-auto bg-cover rounded-lg overflow-hidden"
+          className="relative bg-blend-overlay bg-slate-700 w-xs cursor-pointer lg:w-full lg:max-w-4xl lg:h-80 lg:mx-auto bg-cover rounded-lg overflow-hidden"
         >
           <Link to={`/city/${userLocation?.name}`}>
             <div className="text-white border-b border-slate-500 lg:text-2xl font-semibold flex justify-between py-3 px-8 items-center bg-slate-700 ">
-              <p className="text">
+              <p className="text grid">
+                <span className="lg:text-lg font-light">Your location</span>
                 {userLocation?.name}, {userLocation?.sys?.country}
               </p>
               <p className="lg:text-lg font-light">

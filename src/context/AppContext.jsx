@@ -21,9 +21,15 @@ export const AppProvider = ({ children }) => {
   const [userLocation, setUserLocation] = useState(
     () => JSON.parse(localStorage.getItem("uer-location")) || {}
   );
-  const [notes, setNotes] = useState(
-    () => JSON.parse(localStorage.getItem("notes")) || []
-  );
+  const [notes, setNotes] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("notes"));
+      return Array.isArray(stored) ? stored : [];
+    } catch (e) {
+      return [];
+    }
+  });
+  
   
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));

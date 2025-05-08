@@ -78,9 +78,9 @@ const CityDetails = () => {
     });
   };
   console.log('notes:', notes);
-  const weatherNotes = Array.isArray(notes)
-  ? notes.find((value) => value.name === weatherDetails.name)
-  : null;
+  const weatherNotes = notes?.find(
+    (value) => value.name === weatherDetails.name
+  );
 
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;

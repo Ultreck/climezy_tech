@@ -58,6 +58,23 @@ export const AppProvider = ({ children }) => {
       }
     });
   };
+
+  const editWeatherNote = (name, index, newNote) => {
+    console.log(name, index, newNote);
+    
+    setNotes((prev) =>
+      prev.map((item) =>
+        item.name === name
+          ? {
+              ...item,
+              notes: item.notes.map((note, i) =>
+                i === index ? newNote : note
+              ),
+            }
+          : item
+      )
+    );
+  };
   
 
   const updateRecentlySearchedCity = (city) => {
@@ -104,6 +121,7 @@ export const AppProvider = ({ children }) => {
         clearAll,
         setRemoved,
         setFavorites,
+        editWeatherNote,
         addUserLocation,
         setRecentSearched,
         handleWeatherNote,

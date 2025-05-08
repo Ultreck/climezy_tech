@@ -33,8 +33,8 @@ const formSchema = z.object({
   }),
 });
 
-const NoteDialogModal = ({ type = "", name, note = "" }) => {
-  const { handleWeatherNote } = useAppContext();
+const NoteDialogModal = ({ type = "", name, note = "", index = '' }) => {
+  const { handleWeatherNote, editWeatherNote } = useAppContext();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,16 +42,19 @@ const NoteDialogModal = ({ type = "", name, note = "" }) => {
     },
   });
 
-  useEffect(() => {
-    console.log(note);
-    
+  useEffect(() => {    
     form.setValue('note', note);
   }, [])
   
 
   const onSubmit = (values) => {
     let note = values?.note;
-    handleWeatherNote(name, note);
+    if (type ===  'add') {
+        handleWeatherNote(name, note);
+    }
+    if(type === 'edit'){
+        editWeatherNote(name, index, note);
+    }
   };
 
   return (

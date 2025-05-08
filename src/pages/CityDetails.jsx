@@ -81,9 +81,6 @@ const CityDetails = () => {
   const weatherNotes = notes?.find(
     (value) => value.name === weatherDetails.name
   );
-  console.log(notes);
-  console.log(weatherNotes?.notes);
-  console.log(weatherDetails);
 
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -343,14 +340,12 @@ const CityDetails = () => {
             {weatherNotes?.notes?.length > 0 ? (
               <div className="gap-4 mt-8">
                 {weatherNotes?.notes?.map((note, index) => {
-                  console.log(note);
-
                   return (
-                    <div className="flex border-b justify-between py-3 items-center">
+                    <div key={index} className="flex border-b justify-between py-3 items-center">
                       <div className="text col-span-8">{note}</div>
                       <div className="text flex  space-x-3">
                         {/* <FaRegEdit /> */}
-                        <NoteDialogModal type="edit" note={note} />
+                        <NoteDialogModal type="edit" note={note} name={weatherDetails?.name} index={index} />
                         <Button className="hover:bg-red-500 bg-red-600 flex justify-center items-center">
                           <FiTrash2 />
                         </Button>

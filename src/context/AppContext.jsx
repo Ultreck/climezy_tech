@@ -24,14 +24,7 @@ export const AppProvider = ({ children }) => {
   const [notes, setNotes] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || []
   );
-  // "Bangkok", "Beijing", "Buenos Aires", "Cairo", "Delhi",
-  const noteList = [
-    { name: "Bangkok", id: "0038847", note: [] },
-    { name: "Beijing", id: "0038847", note: [] },
-    { name: "Buenos Aires", id: "0038847", note: [] },
-    { name: "Cairo", id: "0038847", note: [] },
-    { name: "Delhi", id: "0038847", note: [] },
-  ];
+  
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
     localStorage.setItem("removed", JSON.stringify(removed));
@@ -46,7 +39,7 @@ export const AppProvider = ({ children }) => {
   };
   const handleWeatherNote = (name, note) => {
     setNotes((prev) => {
-      const existing = prev.find((item) => item.name === name);
+      const existing = prev?.find((item) => item.name === name);
       if (existing) {
         return prev.map((item) =>
           item.name === name ? { ...item, notes: [...item.notes, note] } : item
@@ -92,7 +85,7 @@ export const AppProvider = ({ children }) => {
     setRecentSearched((prev) => {
       const newList = [...prev, city];
       const uniqueList = newList.filter((value, index, self) => {
-        return index === self.findIndex((t) => t.name === value.name);
+        return index === self?.findIndex((t) => t.name === value.name);
       });
       return uniqueList;
     });

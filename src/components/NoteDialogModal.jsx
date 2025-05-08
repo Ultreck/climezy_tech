@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { FaPlus } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
 import {
@@ -53,10 +52,12 @@ const NoteDialogModal = ({ type = "", name, note = "", index = "" }) => {
     if (type === "add") {
       handleWeatherNote(name, note);
       setOpen(false);
+      form.setValue('note', "")
     }
     if (type === "edit") {
-      editWeatherNote(name, index, note);
-      setOpen(false);
+        editWeatherNote(name, index, note);
+        setOpen(false);
+        form.setValue('note', "")
     }
   };
 

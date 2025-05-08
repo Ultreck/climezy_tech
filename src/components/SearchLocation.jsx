@@ -19,8 +19,8 @@ import { cn } from "@/lib/utils";
 import cities from "cities-list";
 import { useAppContext } from "../context/AppContext";
 import { getWeatherByCity } from "../api/weather";
-import { SlOptionsVertical } from "react-icons/sl";
 import RemovedPopover from "./RemovedPopover";
+import { useDebounce } from "../lib/helper";
 
 
 const CitySelector = ({ disabled, onCityChange }) => {
@@ -51,21 +51,14 @@ const CitySelector = ({ disabled, onCityChange }) => {
 
   const cityArray = useMemo(() => Object.keys(cities), []);
 
- 
-  const filteredCities = useMemo(() => {
-    if (!searchTerm) return;
-    return cityArray
-      .filter((city) => city.toLowerCase().includes(searchTerm.toLowerCase()))
-      .slice(0, 200);
-  }, [searchTerm, cityArray]);
+  const debouncedSearch = useDebounce(searchTerm, 500);
 
-  //   const handleCitySelect = (cityName) => {
-  //     const city = { name: cityName };
-  //     setSelectedCity(city);
-  //     onCityChange?.(city);
-  //     setOpenDropdown(false);
-  //     setSearchTerm("");
-  //   };
+  const filteredCities = useMemo(() => {
+    if (!debouncedSearch) return [];
+    return cityArray
+      .filter((city) => city.toLowerCase().includes(debouncedSearch.toLowerCase()))
+      .slice(0, 250);
+  }, [debouncedSearch, cityArray]);
 
   const handleCitySelect = useCallback(
     async (cityName) => {

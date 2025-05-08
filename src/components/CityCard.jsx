@@ -49,7 +49,7 @@ const CityCard = ({ city }) => {
         </div>
       </Link>
       <div className="space-x-2 ml-4 flex-shrink-0">
-        <button onClick={toggleFavorite} className={`lg:text-3xl ${isFavorite && 'text-orange-600'} `}>
+        <button onClick={toggleFavorite} className={`lg:text-3xl text ${isFavorite && 'text-orange-600'} `}>
           {isFavorite ? "★" : "☆"}
         </button>
         <RemovedPopover city={city}/>

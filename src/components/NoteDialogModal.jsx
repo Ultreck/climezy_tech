@@ -33,7 +33,7 @@ const formSchema = z.object({
   }),
 });
 
-const NoteDialogModal = ({ type = "", name, note = "", index = '' }) => {
+const NoteDialogModal = ({ type = "", name, note = "", index = "" }) => {
   const { handleWeatherNote, editWeatherNote } = useAppContext();
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -42,18 +42,17 @@ const NoteDialogModal = ({ type = "", name, note = "", index = '' }) => {
     },
   });
 
-  useEffect(() => {    
-    form.setValue('note', note);
-  }, [])
-  
+  useEffect(() => {
+    form.setValue("note", note);
+  }, []);
 
   const onSubmit = (values) => {
     let note = values?.note;
-    if (type ===  'add') {
-        handleWeatherNote(name, note);
+    if (type === "add") {
+      handleWeatherNote(name, note);
     }
-    if(type === 'edit'){
-        editWeatherNote(name, index, note);
+    if (type === "edit") {
+      editWeatherNote(name, index, note);
     }
   };
 
@@ -73,11 +72,7 @@ const NoteDialogModal = ({ type = "", name, note = "", index = '' }) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
-            {type === "add" ? (
-              <h2 className="text">Add your new note</h2>
-            ) : (
-              <h2 className="text">Edit your note</h2>
-            )}
+            {type === "add" ? "Add your new note" : "Edit your note"}
           </DialogTitle>
           <DialogDescription>
             {type === "add"

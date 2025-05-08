@@ -36,8 +36,8 @@ const CityDetails = () => {
     weatherCache,
     searchLocation,
     userLocation,
-    handleWeatherNote,
     notes,
+    deleteWeatherNote,
   } = useAppContext();
   const [weatherDetails, setWeatherDetails] = useState({});
   const cityName = window.location.pathname
@@ -85,6 +85,8 @@ const CityDetails = () => {
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   };
+
+  
 
   return (
     <>
@@ -346,7 +348,7 @@ const CityDetails = () => {
                       <div className="text flex  space-x-3">
                         {/* <FaRegEdit /> */}
                         <NoteDialogModal type="edit" note={note} name={weatherDetails?.name} index={index} />
-                        <Button className="hover:bg-red-500 bg-red-600 flex justify-center items-center">
+                        <Button onClick={() => deleteWeatherNote(weatherDetails?.name, index)} className="hover:bg-red-500 bg-red-600 flex justify-center items-center">
                           <FiTrash2 />
                         </Button>
                       </div>

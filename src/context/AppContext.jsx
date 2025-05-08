@@ -49,9 +49,7 @@ export const AppProvider = ({ children }) => {
       const existing = prev.find((item) => item.name === name);
       if (existing) {
         return prev.map((item) =>
-          item.name === name
-            ? { ...item, notes: [...item.notes, note] }
-            : item
+          item.name === name ? { ...item, notes: [...item.notes, note] } : item
         );
       } else {
         return [...prev, { name, notes: [note] }];
@@ -61,7 +59,7 @@ export const AppProvider = ({ children }) => {
 
   const editWeatherNote = (name, index, newNote) => {
     console.log(name, index, newNote);
-    
+
     setNotes((prev) =>
       prev.map((item) =>
         item.name === name
@@ -70,6 +68,19 @@ export const AppProvider = ({ children }) => {
               notes: item.notes.map((note, i) =>
                 i === index ? newNote : note
               ),
+            }
+          : item
+      )
+    );
+  };
+
+  const deleteWeatherNote = (name, index) => {
+    setNotes((prev) =>
+      prev.map((item) =>
+        item.name === name
+          ? {
+              ...item,
+              notes: item.notes.filter((_, i) => i !== index),
             }
           : item
       )
@@ -125,6 +136,7 @@ export const AppProvider = ({ children }) => {
         addUserLocation,
         setRecentSearched,
         handleWeatherNote,
+        deleteWeatherNote,
         setSearchLocation,
         updateWeatherCache,
         updateFavoriteStatus,

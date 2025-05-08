@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -35,6 +35,8 @@ const formSchema = z.object({
 
 const NoteDialogModal = ({ type = "", name, note = "", index = "" }) => {
   const { handleWeatherNote, editWeatherNote } = useAppContext();
+  const [open, setOpen] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,14 +52,16 @@ const NoteDialogModal = ({ type = "", name, note = "", index = "" }) => {
     let note = values?.note;
     if (type === "add") {
       handleWeatherNote(name, note);
+      setOpen(false);
     }
     if (type === "edit") {
       editWeatherNote(name, index, note);
+      setOpen(false);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {type === "add" ? (
           <Button className="hover:bg-blue-500 text-white bg-blue-600">

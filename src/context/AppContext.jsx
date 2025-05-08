@@ -44,15 +44,22 @@ export const AppProvider = ({ children }) => {
   const updateWeatherCache = (city, data) => {
     setWeatherCache((prev) => ({ ...prev, [city]: data }));
   };
-
   const handleWeatherNote = (name, note) => {
     setNotes((prev) => {
-      if(prev?.name === name){
-        return {...prev, note:[...prev?.note, note]}
-      };
-      return  {name: name, note:[note]}
-    })
+      const existing = prev.find((item) => item.name === name);
+  
+      if (existing) {
+        return prev.map((item) =>
+          item.name === name
+            ? { ...item, notes: [...item.notes, note] }
+            : item
+        );
+      } else {
+        return [...prev, { name, notes: [note] }];
+      }
+    });
   };
+  
 
   const updateRecentlySearchedCity = (city) => {
     setRecentSearched((prev) => {

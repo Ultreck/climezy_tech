@@ -25,14 +25,18 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useAppContext } from "../context/AppContext";
 
 const formSchema = z.object({
   note: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "Note must be at least 2 characters.",
   }),
 });
 
-const NoteDialogModal = ({ type = "", note = "" }) => {
+const NoteDialogModal = ({ type = "", name, note = "" }) => {
+     const {
+        handleWeatherNote,
+      } = useAppContext();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,7 +45,8 @@ const NoteDialogModal = ({ type = "", note = "" }) => {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    let note = values?.note
+    handleWeatherNote(name, note);
   };
 
   return (
@@ -89,9 +94,9 @@ const NoteDialogModal = ({ type = "", note = "" }) => {
                   name="note"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Username</FormLabel>
+                      <FormLabel>Note</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="your note here..." {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

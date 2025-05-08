@@ -42,7 +42,6 @@ const CityDetails = () => {
     .split("%20")
     .join(" ");
 
-  // let note =  'This is a  very hot weather ever...'
   useEffect(() => {
     const currentWeather = async () => {
       if (!cityName) return;
@@ -63,12 +62,10 @@ const CityDetails = () => {
       } catch (error) {
         console.log("Error occurs while fetching", error);
       }
-      // handleWeatherNote(searchLocation?.name, note)
     };
 
     currentWeather();
   }, [cityName, userLocation, searchLocation]);
-  console.log(cityName, weatherCache[cityName], weatherDetails);
 
   const formatTime = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleTimeString([], {
@@ -328,7 +325,7 @@ const CityDetails = () => {
           <div className="bg-white rounded-xl shadow-md p-6 mt-6">
             <div className="text flex justify-between items-center">
             <h2 className="text-center font-semibold text-3xl mb-5">Your notes</h2>
-            <NoteDialogModal type="add" />
+            <NoteDialogModal type="add" name={weatherDetails?.name} />
             </div>
             {notes?.length > 0 ? (
               <div className="grid grid-cols-2 gap-4">

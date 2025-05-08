@@ -12,19 +12,26 @@ export const AppProvider = ({ children }) => {
   const [weatherCache, setWeatherCache] = useState(
     () => JSON.parse(localStorage.getItem("weatherCache")) || {}
   );
-  const [recentSearched, setRecentSearched] = useState(() =>
-    JSON.parse(localStorage.getItem("recently-searched")) || []
+  const [recentSearched, setRecentSearched] = useState(
+    () => JSON.parse(localStorage.getItem("recently-searched")) || []
   );
-  const [searchLocation, setSearchLocation] = useState(() =>
-    JSON.parse(localStorage.getItem("searched-location")) || {}
+  const [searchLocation, setSearchLocation] = useState(
+    () => JSON.parse(localStorage.getItem("searched-location")) || {}
   );
-  const [userLocation, setUserLocation] = useState(() =>
-    JSON.parse(localStorage.getItem("uer-location")) || {}
+  const [userLocation, setUserLocation] = useState(
+    () => JSON.parse(localStorage.getItem("uer-location")) || {}
   );
   const [notes, setNotes] = useState(
-    () => JSON.parse(localStorage.getItem("notes")) || {}
+    () => JSON.parse(localStorage.getItem("notes")) || []
   );
-
+  // "Bangkok", "Beijing", "Buenos Aires", "Cairo", "Delhi",
+  const noteList = [
+    { name: "Bangkok", id: "0038847", note: [] },
+    { name: "Beijing", id: "0038847", note: [] },
+    { name: "Buenos Aires", id: "0038847", note: [] },
+    { name: "Cairo", id: "0038847", note: [] },
+    { name: "Delhi", id: "0038847", note: [] },
+  ];
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
     localStorage.setItem("removed", JSON.stringify(removed));
@@ -32,29 +39,38 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("notes", JSON.stringify(notes));
     localStorage.setItem("recently-searched", JSON.stringify(recentSearched));
     localStorage.setItem("searched-location", JSON.stringify(searchLocation));
-}, [favorites, removed, weatherCache, recentSearched, searchLocation, notes]);
+  }, [favorites, removed, weatherCache, recentSearched, searchLocation, notes]);
 
-const updateWeatherCache = (city, data) => {
+  const updateWeatherCache = (city, data) => {
     setWeatherCache((prev) => ({ ...prev, [city]: data }));
-};
+  };
 
-const updateRecentlySearchedCity = (city) => {
+  const handleWeatherNote = (name, note) => {
+    setNotes((prev) => {
+      if(prev?.name === name){
+        return {...prev, note:[...prev?.note, note]}
+      };
+      return  {name: name, note:[note]}
+    })
+  };
+
+  const updateRecentlySearchedCity = (city) => {
     setRecentSearched((prev) => {
-        const newList = [...prev, city];
-        const uniqueList = newList.filter((value, index, self) => {
-            return index === self.findIndex((t) => t.name === value.name);
-        })
-        return uniqueList;
+      const newList = [...prev, city];
+      const uniqueList = newList.filter((value, index, self) => {
+        return index === self.findIndex((t) => t.name === value.name);
+      });
+      return uniqueList;
     });
   };
-  const handleRemoveRecentSearched = (cname) => {      
-      setRecentSearched((prev) => prev.filter((city) => city.name !== cname));    
-    };
-    
-    const addUserLocation = (location) => {
-        setUserLocation(location);
-        localStorage.setItem("user-location", JSON.stringify(location));
-  }
+  const handleRemoveRecentSearched = (cname) => {
+    setRecentSearched((prev) => prev.filter((city) => city.name !== cname));
+  };
+
+  const addUserLocation = (location) => {
+    setUserLocation(location);
+    localStorage.setItem("user-location", JSON.stringify(location));
+  };
 
   const updateFavoriteStatus = (cityName, isFavorite) => {
     setRecentSearched((prev) => {
@@ -68,28 +84,28 @@ const updateRecentlySearchedCity = (city) => {
     setRecentSearched([]);
   };
 
-  
   return (
     <AppContext.Provider
       value={{
-          recentSearched,
-          searchLocation,
-          userLocation,
-          weatherCache,
-          favorites,
-          removed,
-          notes,
-          setNotes,
-          clearAll,
-          setRemoved,
-          setFavorites,
-          addUserLocation,
-          setRecentSearched,
-          setSearchLocation,
-          updateWeatherCache,
-          updateFavoriteStatus,
-          updateRecentlySearchedCity,
-          handleRemoveRecentSearched,
+        recentSearched,
+        searchLocation,
+        userLocation,
+        weatherCache,
+        favorites,
+        removed,
+        notes,
+        setNotes,
+        clearAll,
+        setRemoved,
+        setFavorites,
+        addUserLocation,
+        setRecentSearched,
+        handleWeatherNote,
+        setSearchLocation,
+        updateWeatherCache,
+        updateFavoriteStatus,
+        updateRecentlySearchedCity,
+        handleRemoveRecentSearched,
       }}
     >
       {children}

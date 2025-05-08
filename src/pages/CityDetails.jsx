@@ -24,9 +24,17 @@ import { LuWind } from "react-icons/lu";
 import { GoEye } from "react-icons/go";
 import { CiCloudOn } from "react-icons/ci";
 import { getWeatherByCity } from "../api/weather";
+import note from "../assets/images/empty-note.jpg";
+import NoteDialogModal from "../components/NoteDialogModal";
 
 const CityDetails = () => {
-  const { weatherCache, searchLocation, userLocation } = useAppContext();
+  const {
+    weatherCache,
+    searchLocation,
+    userLocation,
+    handleWeatherNote,
+    notes,
+  } = useAppContext();
   const [weatherDetails, setWeatherDetails] = useState({});
   const cityName = window.location.pathname
     .split("/")
@@ -34,6 +42,7 @@ const CityDetails = () => {
     .split("%20")
     .join(" ");
 
+  // let note =  'This is a  very hot weather ever...'
   useEffect(() => {
     const currentWeather = async () => {
       if (!cityName) return;
@@ -54,6 +63,7 @@ const CityDetails = () => {
       } catch (error) {
         console.log("Error occurs while fetching", error);
       }
+      // handleWeatherNote(searchLocation?.name, note)
     };
 
     currentWeather();
@@ -316,20 +326,34 @@ const CityDetails = () => {
             </div>
           </div>
           <div className="bg-white rounded-xl shadow-md p-6 mt-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center">
-                <h3 className="font-semibold text-gray-700">Sunrise</h3>
-                <p className="text-gray-800">
-                  {formatTime(weatherDetails?.sys?.sunrise)}
-                </p>
-              </div>
-              <div className="text-center">
-                <h3 className="font-semibold text-gray-700">Sunset</h3>
-                <p className="text-gray-800">
-                  {formatTime(weatherDetails?.sys?.sunset)}
-                </p>
-              </div>
+            <div className="text flex justify-between items-center">
+            <h2 className="text-center font-semibold text-3xl mb-5">Your notes</h2>
+            <NoteDialogModal type="add" />
             </div>
+            {notes?.length > 0 ? (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <h3 className="font-semibold text-gray-700">Sunrise</h3>
+                  <p className="text-gray-800">
+                    {formatTime(weatherDetails?.sys?.sunrise)}
+                  </p>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-semibold text-gray-700">Sunset</h3>
+                  <p className="text-gray-800">
+                    {formatTime(weatherDetails?.sys?.sunset)}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="text flex justify-center mt-16">
+                <div className="text mx-auto w-full">
+                <img src={note} alt="Empty note" className="text mx-auto h-40 w-1/2" />
+                <p className="text-center w-full mt-3">There's no notes attached to <span className="font-semibold">
+                {weatherDetails?.name} </span>weather</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

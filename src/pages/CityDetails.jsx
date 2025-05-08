@@ -77,10 +77,10 @@ const CityDetails = () => {
       minute: "2-digit",
     });
   };
-
-  const weatherNotes = notes?.find(
-    (value) => value.name === weatherDetails.name
-  );
+  console.log('notes:', notes);
+  const weatherNotes = Array.isArray(notes)
+  ? notes.find((value) => value.name === weatherDetails.name)
+  : null;
 
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;

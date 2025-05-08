@@ -17,7 +17,7 @@ const WeatherBackground = ({ weatherCondition, children }) => {
     setStars([]);
 
     // Create elements based on weather condition
-    switch (weatherCondition.toLowerCase()) {
+    switch (weatherCondition?.toLowerCase()) {
       case "clear":
         setSun(true);
         // Create some stars for night time
@@ -117,7 +117,7 @@ const WeatherBackground = ({ weatherCondition, children }) => {
   }, [weatherCondition]);
 
   const getBackgroundGradient = () => {
-    switch (weatherCondition.toLowerCase()) {
+    switch (weatherCondition?.toLowerCase()) {
       case "clear":
         return "bg-gradient-to-b from-blue-600 to-blue-800";
       case "clouds":

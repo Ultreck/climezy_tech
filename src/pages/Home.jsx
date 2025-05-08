@@ -61,8 +61,9 @@ const Home = () => {
 
   useGeolocation(async ({ latitude, longitude }) => {
     try {
-      const weatherData = await getWeatherByCoords(latitude, longitude);
-      addUserLocation(weatherData);
+      const weatherData = await getWeatherByCoords(latitude, longitude);      
+      addUserLocation(weatherData);      
+      return;
     } catch (error) {
       console.error("Failed to fetch weather from geolocation:", error);
     }

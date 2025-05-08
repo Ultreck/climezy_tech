@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -34,9 +34,7 @@ const formSchema = z.object({
 });
 
 const NoteDialogModal = ({ type = "", name, note = "" }) => {
-     const {
-        handleWeatherNote,
-      } = useAppContext();
+  const { handleWeatherNote } = useAppContext();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,8 +42,15 @@ const NoteDialogModal = ({ type = "", name, note = "" }) => {
     },
   });
 
+  useEffect(() => {
+    console.log(note);
+    
+    form.setValue('note', note);
+  }, [])
+  
+
   const onSubmit = (values) => {
-    let note = values?.note
+    let note = values?.note;
     handleWeatherNote(name, note);
   };
 
@@ -57,7 +62,7 @@ const NoteDialogModal = ({ type = "", name, note = "" }) => {
             <FaPlus /> Add note
           </Button>
         ) : (
-          <Button className="hover:bg-blue-500">
+          <Button className="hover:bg-blue-500 bg-blue-600 flex justify-center items-center">
             <FaRegEdit />{" "}
           </Button>
         )}
@@ -72,39 +77,35 @@ const NoteDialogModal = ({ type = "", name, note = "" }) => {
             )}
           </DialogTitle>
           <DialogDescription>
-            {type === "add" ? (
-              <h2 className="text">
-                Here you can add a new note to the current location weather
-              </h2>
-            ) : (
-              <h2 className="text">
-                Here you can edit your note to your preference
-              </h2>
-            )}
+            {type === "add"
+              ? "Here you can add a new note to the current location weather"
+              : "Here you can edit your note to your preference"}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="note"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Note</FormLabel>
+                    <FormControl>
+                      <Input placeholder="your note here..." {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                className=" w-full bg-blue-600 hover:bg-blue-500"
+                type="submit"
               >
-                <FormField
-                  control={form.control}
-                  name="note"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Note</FormLabel>
-                      <FormControl>
-                        <Input placeholder="your note here..." {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button className=" w-full bg-blue-600 hover:bg-blue-500" type="submit">Submit</Button>
-              </form>
-            </Form>
+                Submit
+              </Button>
+            </form>
+          </Form>
         </div>
       </DialogContent>
     </Dialog>

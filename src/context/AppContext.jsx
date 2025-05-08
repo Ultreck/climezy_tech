@@ -47,7 +47,6 @@ export const AppProvider = ({ children }) => {
   const handleWeatherNote = (name, note) => {
     setNotes((prev) => {
       const existing = prev.find((item) => item.name === name);
-  
       if (existing) {
         return prev.map((item) =>
           item.name === name

@@ -26,6 +26,10 @@ import { CiCloudOn } from "react-icons/ci";
 import { getWeatherByCity } from "../api/weather";
 import note from "../assets/images/empty-note.jpg";
 import NoteDialogModal from "../components/NoteDialogModal";
+import { FaRegEdit } from "react-icons/fa";
+import { FiTrash2 } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
+
 
 const CityDetails = () => {
   const {
@@ -73,6 +77,13 @@ const CityDetails = () => {
       minute: "2-digit",
     });
   };
+
+  const weatherNotes = notes?.find(
+    (value) => value.name === weatherDetails.name
+  );
+  console.log(notes);
+  console.log(weatherNotes?.notes);
+  console.log(weatherDetails);
 
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -324,30 +335,45 @@ const CityDetails = () => {
           </div>
           <div className="bg-white rounded-xl shadow-md p-6 mt-6">
             <div className="text flex justify-between items-center">
-            <h2 className="text-center font-semibold text-3xl mb-5">Your notes</h2>
-            <NoteDialogModal type="add" name={weatherDetails?.name} />
+              <h2 className="text-center font-semibold text-3xl mb-5">
+                Your notes
+              </h2>
+              <NoteDialogModal type="add" name={weatherDetails?.name} />
             </div>
-            {notes?.length > 0 ? (
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center">
-                  <h3 className="font-semibold text-gray-700">Sunrise</h3>
-                  <p className="text-gray-800">
-                    {formatTime(weatherDetails?.sys?.sunrise)}
-                  </p>
-                </div>
-                <div className="text-center">
-                  <h3 className="font-semibold text-gray-700">Sunset</h3>
-                  <p className="text-gray-800">
-                    {formatTime(weatherDetails?.sys?.sunset)}
-                  </p>
-                </div>
+            {weatherNotes?.notes?.length > 0 ? (
+              <div className="gap-4 mt-8">
+                {weatherNotes?.notes?.map((note, index) => {
+                  console.log(note);
+
+                  return (
+                    <div className="flex border-b justify-between py-3 items-center">
+                      <div className="text col-span-8">{note}</div>
+                      <div className="text flex  space-x-3">
+                        {/* <FaRegEdit /> */}
+                        <NoteDialogModal type="edit" note={note} />
+                        <Button className="hover:bg-red-500 bg-red-600 flex justify-center items-center">
+                          <FiTrash2 />
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="text flex justify-center mt-16">
                 <div className="text mx-auto w-full">
-                <img src={note} alt="Empty note" className="text mx-auto h-40 w-1/2" />
-                <p className="text-center w-full mt-3">There's no notes attached to <span className="font-semibold">
-                {weatherDetails?.name} </span>weather</p>
+                  <img
+                    src={note}
+                    alt="Empty note"
+                    className="text mx-auto h-40 w-1/2"
+                  />
+                  <p className="text-center w-full mt-3">
+                    There's no notes attached to{" "}
+                    <span className="font-semibold">
+                      {weatherDetails?.name}{" "}
+                    </span>
+                    weather
+                  </p>
                 </div>
               </div>
             )}

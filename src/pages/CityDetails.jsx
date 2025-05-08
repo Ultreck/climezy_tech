@@ -315,6 +315,22 @@ const CityDetails = () => {
               </div>
             </div>
           </div>
+          <div className="bg-white rounded-xl shadow-md p-6 mt-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center">
+                <h3 className="font-semibold text-gray-700">Sunrise</h3>
+                <p className="text-gray-800">
+                  {formatTime(weatherDetails?.sys?.sunrise)}
+                </p>
+              </div>
+              <div className="text-center">
+                <h3 className="font-semibold text-gray-700">Sunset</h3>
+                <p className="text-gray-800">
+                  {formatTime(weatherDetails?.sys?.sunset)}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

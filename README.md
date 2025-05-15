@@ -71,9 +71,8 @@ cp .env.example .env.local
 └── README.md
 
 
-## 📦 Installation
 
-#  Install dependencies
+# 📦 Install dependencies
 npm install
 
 # Running the project, development mode

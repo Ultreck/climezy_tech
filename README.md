@@ -32,20 +32,29 @@ This is a single-page weather tracking web application built for Climezy Technol
 
 ---
 
+
+
+### 1. Clone the repository
+To run this project locally, follow the steps below:
+
+```bash
+# Clone the repository
+git clone https://github.com/Ultreck/climezy_tech.git
+cd climezy_tech
+
+# Install dependencies
+npm install
+
+# Copy the example environment variables file and fill it in
+cp .env.example .env.local
+
+
 ## Setup
 1. Copy the `.env.example` file and rename it to `.env.local`:
    ```bash
    cp .env.example .env.local
 
 
-
-## 📦 Installation
-
-#  Install dependencies
-npm install
-
-# Running the project, development mode
-npm run dev
 
 ├── public/
 ├── src/
@@ -62,23 +71,26 @@ npm run dev
 └── README.md
 
 
+## 📦 Installation
+
+#  Install dependencies
+npm install
+
+# Running the project, development mode
+npm run dev
+
+
+
 ## 🌐 Live Demo
 You can view the live version of the app here:
 👉 https://climezy-tech.vercel.app/
 
 ## 🙋 Author
 Emmanuel – @Ultreck
-repo - https://github.com/Ultreck/climezy_tech
+📦 GitHub Repo: https://github.com/Ultreck/climezy_tech
 
 ## 🎥 Demo Video
 Here’s a short walkthrough of the app's core features:
 👉 [Link to video demo] — (e.g., YouTube, Loom, or Drive)
-
-
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/your-username/climezy-weather-app.git
-cd climezy-weather-app
 
 

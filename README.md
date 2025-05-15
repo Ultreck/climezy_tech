@@ -90,6 +90,6 @@ Emmanuel – @Ultreck
 
 ## 🎥 Demo Video
 Here’s a short walkthrough of the app's core features:
-👉 [Link to video demo] — (e.g., YouTube, Loom, or Drive)
+👉 https://www.youtube.com/watch?v=qs_-g_v49nY
 
 

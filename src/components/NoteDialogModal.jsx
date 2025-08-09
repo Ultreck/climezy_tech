@@ -52,12 +52,12 @@ const NoteDialogModal = ({ type = "", name, note = "", index = "" }) => {
     if (type === "add") {
       handleWeatherNote(name, note);
       setOpen(false);
-      form.setValue('note', "")
+      form.setValue('note', "");
     }
     if (type === "edit") {
         editWeatherNote(name, index, note);
         setOpen(false);
-        form.setValue('note', "")
+        form.setValue('note', "");
     }
   };
 
